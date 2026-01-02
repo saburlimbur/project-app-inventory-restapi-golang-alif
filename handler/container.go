@@ -1,0 +1,35 @@
+package handler
+
+import (
+	"alfdwirhmn/inventory/repository"
+	"alfdwirhmn/inventory/service"
+	"alfdwirhmn/inventory/utils"
+
+	"github.com/go-playground/validator/v10"
+	"go.uber.org/zap"
+)
+
+type Container struct {
+	User     *UserHandler
+	Auth     *AuthHandler
+	Category *CategoryHandler
+
+	Repositories *repository.Container
+}
+
+func NewContainer(
+	svc *service.Container,
+	repo *repository.Container,
+	log *zap.Logger,
+	conf utils.Configuration,
+) *Container {
+
+	validate := validator.New()
+
+	return &Container{
+		User:         NewUserHandler(svc.User, validate, log, conf),
+		Auth:         NewAuthHandler(svc.Auth, log),
+		Category:     NewCategoryHandler(svc.Category, validate, log, conf),
+		Repositories: repo,
+	}
+}
