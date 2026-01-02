@@ -13,6 +13,11 @@ type Response struct {
 	Errors  any    `json:"errors,omitempty"`
 }
 
+type ValidationError struct {
+	Field   string `json:"field"`
+	Message string `json:"message"`
+}
+
 func JSONSuccess(w http.ResponseWriter, code int, message string, data any) {
 	resp := Response{
 		Status:  true,
