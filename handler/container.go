@@ -14,6 +14,7 @@ type Container struct {
 	Auth      *AuthHandler
 	Category  *CategoryHandler
 	Warehouse *WarehouseHandler
+	Racks     *RacksHandler
 
 	Repositories *repository.Container
 }
@@ -28,10 +29,12 @@ func NewContainer(
 	validate := validator.New()
 
 	return &Container{
-		User:         NewUserHandler(svc.User, validate, log, conf),
-		Auth:         NewAuthHandler(svc.Auth, log),
-		Category:     NewCategoryHandler(svc.Category, validate, log, conf),
-		Warehouse:    NewWarehouseHandler(svc.Warehouse, validate, log, conf),
+		User:      NewUserHandler(svc.User, validate, log, conf),
+		Auth:      NewAuthHandler(svc.Auth, log),
+		Category:  NewCategoryHandler(svc.Category, validate, log, conf),
+		Warehouse: NewWarehouseHandler(svc.Warehouse, validate, log, conf),
+		Racks:     NewRacksHandler(svc.Racks, validate, log, conf),
+
 		Repositories: repo,
 	}
 }

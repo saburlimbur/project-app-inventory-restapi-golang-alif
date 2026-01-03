@@ -61,6 +61,16 @@ func NewRouter(h *handler.Container, log *zap.Logger) *chi.Mux {
 			})
 		})
 
+		r.Route("/racks", func(r chi.Router) {
+			r.With(role.AllowAdmin()).Post("/", h.Racks.Create)
+			r.With(role.AllowRead()).Get("/", h.Racks.Lists)
+
+			r.Route("/{id}", func(r chi.Router) {
+				r.With(role.AllowAdmin()).Put("/", h.Racks.Update)
+				r.With(role.AllowAdmin()).Delete("/", h.Racks.Delete)
+			})
+		})
+
 		r.Route("/categories", func(r chi.Router) {
 			// read all role
 			r.With(role.AllowRead()).Get("/", h.Category.Lists)
