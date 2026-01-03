@@ -12,6 +12,8 @@ import (
 type CategoryService interface {
 	Create(ctx context.Context, usr *model.User, req dto.CreateCategoryRequest) (*model.Category, error)
 	FindAll(page, limit int) (*[]model.Category, *dto.Pagination, error)
+	Update(ctx context.Context, usr *model.User, id int, req dto.UpdateCategoryRequest) (*model.Category, error)
+	Delete(ctx context.Context, usr *model.User, id int) error
 }
 
 type categoryService struct {
@@ -79,4 +81,47 @@ func (c *categoryService) FindAll(page, limit int) (*[]model.Category, *dto.Pagi
 	}
 
 	return &category, &pagination, nil
+}
+
+func (c *categoryService) Update(ctx context.Context, usr *model.User, id int, req dto.UpdateCategoryRequest) (*model.Category, error) {
+
+	// permission
+	if !c.permSvc.CanUpdateMasterData(usr.Role) {
+		return nil, errors.New("forbidden: cannot update category")
+	}
+
+	// unique name
+	exists, err := c.repo.IsCategoryNameExists(ctx, req.Name, id)
+	if err != nil {
+		return nil, err
+	}
+	if exists {
+		return nil, errors.New("category name already exists")
+	}
+
+	// unique code
+	exists, err = c.repo.IsCategoryCodeExists(ctx, req.Code, id)
+	if err != nil {
+		return nil, err
+	}
+	if exists {
+		return nil, errors.New("category code already exists")
+	}
+
+	payload := &model.Category{
+		Code:        req.Code,
+		Name:        req.Name,
+		Description: req.Description,
+		IsActive:    *req.IsActive,
+	}
+
+	return c.repo.Update(ctx, id, payload)
+}
+
+func (c *categoryService) Delete(ctx context.Context, usr *model.User, id int) error {
+	if !c.permSvc.CanDeleteMasterData(usr.Role) {
+		return errors.New("forbidden: cannot delete category")
+	}
+
+	return c.repo.Delete(ctx, id)
 }

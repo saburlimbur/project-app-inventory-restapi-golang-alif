@@ -4,6 +4,7 @@ import (
 	"alfdwirhmn/inventory/database"
 	"alfdwirhmn/inventory/model"
 	"context"
+	"errors"
 
 	"go.uber.org/zap"
 )
@@ -11,6 +12,8 @@ import (
 type CategoryRepository interface {
 	Create(ctx context.Context, ctg *model.Category) (*model.Category, error)
 	Lists(page, limit int) ([]model.Category, int, error)
+	Update(ctx context.Context, id int, payload *model.Category) (*model.Category, error)
+	Delete(ctx context.Context, id int) error
 
 	IsCategoryNameExists(ctx context.Context, name string, id int) (bool, error)
 	IsCategoryCodeExists(ctx context.Context, code string, id int) (bool, error)
@@ -65,20 +68,26 @@ func (r *categoryRepository) Lists(page, limit int) ([]model.Category, int, erro
 	offset := (page - 1) * limit
 
 	var totalCtg int
+	countQuery := `SELECT COUNT(*) FROM categories`
+	if err := r.DB.QueryRow(context.Background(), countQuery).Scan(&totalCtg); err != nil {
+		return nil, 0, err
+	}
 
 	query := `
-			SELECT id, code, name, description, is_active, created_by, created_at
+			SELECT id, code, name, description, is_active, created_by, created_at, updated_at
 			FROM categories
 			ORDER BY created_at DESC
 			LIMIT $1 OFFSET $2
 	`
 
-	err := r.DB.QueryRow(context.Background(), query).Scan(&totalCtg)
+	// err := r.DB.QueryRow(context.Background(), query).Scan(&totalCtg)
 
 	rows, err := r.DB.Query(context.Background(), query, limit, offset)
 	if err != nil {
 		return nil, 0, err
 	}
+
+	defer rows.Close()
 
 	var category []model.Category
 
@@ -92,6 +101,7 @@ func (r *categoryRepository) Lists(page, limit int) ([]model.Category, int, erro
 			&ctg.IsActive,
 			&ctg.CreatedBy,
 			&ctg.CreatedAt,
+			&ctg.UpdatedAt,
 		); err != nil {
 			return nil, 0, err
 		}
@@ -100,6 +110,66 @@ func (r *categoryRepository) Lists(page, limit int) ([]model.Category, int, erro
 	}
 
 	return category, totalCtg, nil
+}
+
+func (r *categoryRepository) Update(ctx context.Context, id int, payload *model.Category) (*model.Category, error) {
+	query := `
+		UPDATE categories
+		SET
+			code = $1,
+			name = $2,
+			description = $3,
+			is_active = $4,
+			updated_at = CURRENT_TIMESTAMP
+		WHERE id = $5
+		RETURNING id, code, name, description, is_active, created_by, created_at, updated_at
+	`
+
+	var category model.Category
+
+	err := r.DB.QueryRow(ctx, query,
+		payload.Code,
+		payload.Name,
+		payload.Description,
+		payload.IsActive,
+		id,
+	).Scan(
+		&category.ID,
+		&category.Code,
+		&category.Name,
+		&category.Description,
+		&category.IsActive,
+		&category.CreatedBy,
+		&category.CreatedAt,
+		&category.UpdatedAt,
+	)
+
+	if err != nil {
+		return nil, errors.New("category not found or already deleted")
+	}
+
+	return &category, nil
+}
+
+func (r *categoryRepository) Delete(ctx context.Context, id int) error {
+	query := `
+		UPDATE categories
+		SET
+			is_active = false,
+			updated_at = CURRENT_TIMESTAMP
+		WHERE id = $1;
+	`
+
+	result, err := r.DB.Exec(ctx, query, id)
+	if err != nil {
+		return err
+	}
+
+	if result.RowsAffected() == 0 {
+		return errors.New("category not found or already deleted")
+	}
+
+	return nil
 }
 
 func (r *categoryRepository) IsCategoryNameExists(

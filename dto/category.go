@@ -23,6 +23,15 @@ type CreateCategoryRequest struct {
 	// CreatedBy *int  `json:"created_by,omitempty" db:"created_by"`
 }
 
+type UpdateCategoryRequest struct {
+	Code        string `json:"code" validate:"required,max=20"`
+	Name        string `json:"name" validate:"required,max=100"`
+	Description string `json:"description" validate:"omitempty"`
+	IsActive    *bool  `json:"is_active,omitempty"`
+
+	// CreatedBy *int `json:"created_by,omitempty" db:"created_by"`
+}
+
 // func ToCategoryResponseDTO(ctg *model.Category) *CategoryResponseDTO {
 // 	return &CategoryResponseDTO{
 // 		ID:          ctg.ID,

@@ -10,6 +10,7 @@ import (
 	"net/http"
 	"strconv"
 
+	"github.com/go-chi/chi/v5"
 	"github.com/go-playground/validator/v10"
 	"go.uber.org/zap"
 )
@@ -95,4 +96,81 @@ func (h *CategoryHandler) Lists(w http.ResponseWriter, r *http.Request) {
 	}
 
 	utils.JSONWithPagination(w, http.StatusOK, "succesfully get category data", category, *pagination)
+}
+
+func (h *CategoryHandler) Update(w http.ResponseWriter, r *http.Request) {
+	// user dari context
+	user, ok := r.Context().Value(middleware.UserContextKey).(*model.User)
+	if !ok {
+		utils.JSONError(w, http.StatusUnauthorized, "unauthorized", nil)
+		return
+	}
+
+	id, err := strconv.Atoi(chi.URLParam(r, "id"))
+	if err != nil {
+		utils.JSONError(w, http.StatusBadRequest, "invalid category id", nil)
+		return
+	}
+
+	var req dto.UpdateCategoryRequest
+	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
+		utils.JSONError(w, http.StatusBadRequest, "invalid request body", err)
+		return
+	}
+
+	if validationErrors, err := utils.ValidateErrors(req); err != nil {
+		utils.JSONError(w, http.StatusBadRequest, "validation failed", validationErrors)
+		return
+	}
+
+	category, err := h.CategoryService.Update(r.Context(), user, id, req)
+	if err != nil {
+		utils.JSONError(w, http.StatusConflict, err.Error(), nil)
+		return
+	}
+
+	h.Logger.Info("Category updated successfully",
+		zap.Int("category_id", category.ID),
+		zap.String("updated_by", user.Role),
+	)
+
+	utils.JSONSuccess(w, http.StatusOK, "category updated successfully",
+		dto.CategoryResponseDTO{
+			ID:          category.ID,
+			Code:        category.Code,
+			Name:        category.Name,
+			Description: category.Description,
+			IsActive:    category.IsActive,
+			CreatedBy:   *category.CreatedBy,
+			CreatedAt:   category.CreatedAt,
+			UpdatedAt:   category.UpdatedAt,
+		},
+	)
+}
+
+func (h *CategoryHandler) Delete(w http.ResponseWriter, r *http.Request) {
+	user, ok := r.Context().Value(middleware.UserContextKey).(*model.User)
+	if !ok {
+		utils.JSONError(w, http.StatusUnauthorized, "unauthorized", nil)
+		return
+	}
+
+	id, err := strconv.Atoi(chi.URLParam(r, "id"))
+	if err != nil {
+		utils.JSONError(w, http.StatusBadRequest, "invalid category id", nil)
+		return
+	}
+
+	err = h.CategoryService.Delete(r.Context(), user, id)
+	if err != nil {
+		utils.JSONError(w, http.StatusForbidden, err.Error(), nil)
+		return
+	}
+
+	h.Logger.Info("Category deleted successfully",
+		zap.Int("category_id", id),
+		zap.String("deleted_by", user.Role),
+	)
+
+	utils.JSONSuccess(w, http.StatusOK, "category deleted successfully", id)
 }

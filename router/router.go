@@ -53,12 +53,13 @@ func NewRouter(h *handler.Container, log *zap.Logger) *chi.Mux {
 
 		r.Route("/categories", func(r chi.Router) {
 			// read all role
-			r.With(role.AllowRead()).
-				Get("/", h.Category.Lists)
+			r.With(role.AllowRead()).Get("/", h.Category.Lists)
+			r.With(role.AllowAdmin()).Post("/", h.Category.Create)
 
-			// create role admin dan super admin
-			r.With(role.AllowAdmin()).
-				Post("/", h.Category.Create)
+			r.Route("/{id}", func(r chi.Router) {
+				r.With(role.AllowAdmin()).Put("/", h.Category.Update)
+				r.With(role.AllowAdmin()).Delete("/", h.Category.Delete)
+			})
 		})
 	})
 
