@@ -10,9 +10,10 @@ import (
 )
 
 type Container struct {
-	User     *UserHandler
-	Auth     *AuthHandler
-	Category *CategoryHandler
+	User      *UserHandler
+	Auth      *AuthHandler
+	Category  *CategoryHandler
+	Warehouse *WarehouseHandler
 
 	Repositories *repository.Container
 }
@@ -30,6 +31,7 @@ func NewContainer(
 		User:         NewUserHandler(svc.User, validate, log, conf),
 		Auth:         NewAuthHandler(svc.Auth, log),
 		Category:     NewCategoryHandler(svc.Category, validate, log, conf),
+		Warehouse:    NewWarehouseHandler(svc.Warehouse, validate, log, conf),
 		Repositories: repo,
 	}
 }

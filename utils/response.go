@@ -6,6 +6,20 @@ import (
 	"net/http"
 )
 
+type PaginationResponse struct {
+	Page       int `json:"page"`
+	Limit      int `json:"limit"`
+	TotalRows  int `json:"total_rows"`
+	TotalPages int `json:"total_pages"`
+}
+
+type ResponseWithPagination struct {
+	Status     bool           `json:"status"`
+	Message    string         `json:"message"`
+	Data       any            `json:"data"`
+	Pagination dto.Pagination `json:"pagination"`
+}
+
 type Response struct {
 	Status  bool   `json:"status"`
 	Message string `json:"message"`
@@ -37,11 +51,11 @@ func JSONError(w http.ResponseWriter, code int, message string, errors any) {
 }
 
 func JSONWithPagination(w http.ResponseWriter, code int, message string, data any, pagination dto.Pagination) {
-	resp := map[string]interface{}{
-		"status":     true,
-		"message":    message,
-		"data":       data,
-		"pagination": pagination,
+	resp := ResponseWithPagination{
+		Status:     true,
+		Message:    message,
+		Data:       data,
+		Pagination: pagination,
 	}
 	writeJSON(w, code, resp)
 }

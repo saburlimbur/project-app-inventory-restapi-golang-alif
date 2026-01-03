@@ -7,16 +7,18 @@ import (
 )
 
 type Container struct {
-	UserRepo     UserRepository
-	CategoryRepo CategoryRepository
+	UserRepo      UserRepository
+	CategoryRepo  CategoryRepository
+	WarehouseRepo WarehouseRepository
 
 	SessionRepo SessionRepository
 }
 
 func NewContainer(db database.PgxIface, log *zap.Logger) *Container {
 	return &Container{
-		UserRepo:     NewUserRepository(db, log),
-		CategoryRepo: NewCategoryRepository(db, log),
+		UserRepo:      NewUserRepository(db, log),
+		CategoryRepo:  NewCategoryRepository(db, log),
+		WarehouseRepo: NewWarehouseRepository(db, log),
 
 		SessionRepo: NewSessionRepository(db),
 		// SessionRepo: NewSessionRepository(db, log),
