@@ -10,6 +10,7 @@ import (
 
 type CategoryRepository interface {
 	Create(ctx context.Context, ctg *model.Category) (*model.Category, error)
+	Lists(page, limit int) ([]model.Category, int, error)
 
 	IsCategoryNameExists(ctx context.Context, name string, id int) (bool, error)
 	IsCategoryCodeExists(ctx context.Context, code string, id int) (bool, error)
@@ -58,6 +59,47 @@ func (r *categoryRepository) Create(ctx context.Context, ctg *model.Category) (*
 
 	r.Logger.Info("category created succesfully")
 	return &ctgr, nil
+}
+
+func (r *categoryRepository) Lists(page, limit int) ([]model.Category, int, error) {
+	offset := (page - 1) * limit
+
+	var totalCtg int
+
+	query := `
+			SELECT id, code, name, description, is_active, created_by, created_at
+			FROM categories
+			ORDER BY created_at DESC
+			LIMIT $1 OFFSET $2
+	`
+
+	err := r.DB.QueryRow(context.Background(), query).Scan(&totalCtg)
+
+	rows, err := r.DB.Query(context.Background(), query, limit, offset)
+	if err != nil {
+		return nil, 0, err
+	}
+
+	var category []model.Category
+
+	for rows.Next() {
+		var ctg model.Category
+		if err := rows.Scan(
+			&ctg.ID,
+			&ctg.Code,
+			&ctg.Name,
+			&ctg.Description,
+			&ctg.IsActive,
+			&ctg.CreatedBy,
+			&ctg.CreatedAt,
+		); err != nil {
+			return nil, 0, err
+		}
+
+		category = append(category, ctg)
+	}
+
+	return category, totalCtg, nil
 }
 
 func (r *categoryRepository) IsCategoryNameExists(

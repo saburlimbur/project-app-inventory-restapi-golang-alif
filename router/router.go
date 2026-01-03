@@ -25,6 +25,12 @@ func NewRouter(h *handler.Container, log *zap.Logger) *chi.Mux {
 	r.Use(middleware.Logger)
 	r.Use(middleware.Recoverer)
 
+	// role helper
+	role := appMiddleware.NewRoleMiddleware(
+		h.Repositories.SessionRepo,
+		h.Repositories.UserRepo,
+	)
+
 	// health check
 	r.Get("/", func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Content-Type", "application/json")
@@ -32,39 +38,27 @@ func NewRouter(h *handler.Container, log *zap.Logger) *chi.Mux {
 		json.NewEncoder(w).Encode(resp)
 	})
 
-	r.Route("/v1", func(r chi.Router) {
+	r.Route("/api/v1", func(r chi.Router) {
 		// public endpoint auth
 		r.Route("/auth", func(r chi.Router) {
 			r.Post("/register", h.Auth.Register)
 			r.Post("/login", h.Auth.Login)
 		})
 
-		// endpoint admin dan super admin
+		// admin dan super admin
 		r.Route("/users", func(r chi.Router) {
-			r.Use(
-				appMiddleware.AuthMiddleware(
-					h.Repositories.SessionRepo,
-					h.Repositories.UserRepo,
-					"admin",
-					"super_admin",
-				),
-			)
-
-			r.Post("/", h.User.Create)
-			r.Get("/", h.User.Lists)
+			r.With(role.AllowAdmin()).Post("/", h.User.Create)
+			r.With(role.AllowAdmin()).Get("/", h.User.Lists)
 		})
 
 		r.Route("/categories", func(r chi.Router) {
-			r.Use(
-				appMiddleware.AuthMiddleware(
-					h.Repositories.SessionRepo,
-					h.Repositories.UserRepo,
-					"admin",
-					"super_admin",
-				),
-			)
+			// read all role
+			r.With(role.AllowRead()).
+				Get("/", h.Category.Lists)
 
-			r.Post("/", h.Category.Create)
+			// create role admin dan super admin
+			r.With(role.AllowAdmin()).
+				Post("/", h.Category.Create)
 		})
 	})
 

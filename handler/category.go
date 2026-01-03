@@ -8,6 +8,7 @@ import (
 	"alfdwirhmn/inventory/utils"
 	"encoding/json"
 	"net/http"
+	"strconv"
 
 	"github.com/go-playground/validator/v10"
 	"go.uber.org/zap"
@@ -71,4 +72,27 @@ func (h *CategoryHandler) Create(w http.ResponseWriter, r *http.Request) {
 			UpdatedAt:   category.UpdatedAt,
 		},
 	)
+}
+
+func (h *CategoryHandler) Lists(w http.ResponseWriter, r *http.Request) {
+	page, err := strconv.Atoi(r.URL.Query().Get("page"))
+	if err != nil || page < 1 {
+		utils.JSONError(w, http.StatusBadRequest, "invalid page", nil)
+		return
+	}
+
+	limit, err := strconv.Atoi(h.Config.Limit)
+	if err != nil {
+		utils.JSONError(w, http.StatusInternalServerError, "invalid limit config", nil)
+		return
+	}
+
+	category, pagination, err := h.CategoryService.FindAll(page, limit)
+	if err != nil {
+		h.Logger.Error("failed get category", zap.Error(err))
+		utils.JSONError(w, http.StatusInternalServerError, "failed", nil)
+		return
+	}
+
+	utils.JSONWithPagination(w, http.StatusOK, "succesfully get category data", category, *pagination)
 }

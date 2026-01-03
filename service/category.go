@@ -4,12 +4,14 @@ import (
 	"alfdwirhmn/inventory/dto"
 	"alfdwirhmn/inventory/model"
 	"alfdwirhmn/inventory/repository"
+	"alfdwirhmn/inventory/utils"
 	"context"
 	"errors"
 )
 
 type CategoryService interface {
 	Create(ctx context.Context, usr *model.User, req dto.CreateCategoryRequest) (*model.Category, error)
+	FindAll(page, limit int) (*[]model.Category, *dto.Pagination, error)
 }
 
 type categoryService struct {
@@ -60,4 +62,21 @@ func (c *categoryService) Create(ctx context.Context, usr *model.User, req dto.C
 	}
 
 	return c.repo.Create(ctx, category)
+}
+
+func (c *categoryService) FindAll(page, limit int) (*[]model.Category, *dto.Pagination, error) {
+	category, total, err := c.repo.Lists(page, limit)
+
+	if err != nil {
+		return nil, nil, err
+	}
+
+	pagination := dto.Pagination{
+		Page:       page,
+		Limit:      limit,
+		TotalPages: utils.TotalPage(limit, int64(total)),
+		TotalRows:  total,
+	}
+
+	return &category, &pagination, nil
 }
