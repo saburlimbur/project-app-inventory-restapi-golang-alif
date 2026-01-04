@@ -31,8 +31,10 @@ func main() {
 
 	logger, err = utils.InitLogger(config.PathLogg, config.Debug)
 
+	txManager := database.NewTxManager(db)
+
 	repo := repository.NewContainer(db, logger)
-	svc := service.NewContainer(repo)
+	svc := service.NewContainer(repo, logger, txManager)
 	h := handler.NewContainer(svc, repo, logger, config)
 
 	r := router.NewRouter(h, logger)
