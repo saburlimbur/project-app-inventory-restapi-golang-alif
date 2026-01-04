@@ -37,6 +37,16 @@ func (r *RoleMiddleware) AllowRead() func(http.Handler) http.Handler {
 	)
 }
 
+func (r *RoleMiddleware) AllowAllRole() func(http.Handler) http.Handler {
+	return AuthMiddleware(
+		r.SessionRepo,
+		r.UserRepo,
+		RoleStaff,
+		RoleAdmin,
+		RoleSuperAdmin,
+	)
+}
+
 // ADMIN: admin, super_admin
 func (r *RoleMiddleware) AllowAdmin() func(http.Handler) http.Handler {
 	return AuthMiddleware(

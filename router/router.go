@@ -58,6 +58,10 @@ func NewRouter(h *handler.Container, log *zap.Logger) *chi.Mux {
 			r.Route("/{id}", func(r chi.Router) {
 				r.With(role.AllowAdmin()).Put("/", h.Warehouse.Update)
 				r.With(role.AllowAdmin()).Delete("/", h.Warehouse.Delete)
+
+				r.Route("/{id}", func(r chi.Router) {
+					r.With(role.AllowAdmin()).Put("/", h.Items.Update)
+				})
 			})
 		})
 
@@ -68,6 +72,16 @@ func NewRouter(h *handler.Container, log *zap.Logger) *chi.Mux {
 			r.Route("/{id}", func(r chi.Router) {
 				r.With(role.AllowAdmin()).Put("/", h.Racks.Update)
 				r.With(role.AllowAdmin()).Delete("/", h.Racks.Delete)
+			})
+		})
+
+		r.Route("/items", func(r chi.Router) {
+			r.With(role.AllowAdmin()).Post("/", h.Items.Create)
+			r.With(role.AllowRead()).Get("/", h.Items.Lists)
+
+			r.Route("/{id}", func(r chi.Router) {
+				r.With(role.AllowAllRole()).Put("/", h.Items.Update)
+				r.With(role.AllowAdmin()).Delete("/", h.Items.Delete)
 			})
 		})
 

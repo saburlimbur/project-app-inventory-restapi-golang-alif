@@ -8,6 +8,7 @@ type Container struct {
 	Category  CategoryService
 	Warehouse WarehouseService
 	Racks     RacksService
+	Items     ItemsService
 }
 
 func NewContainer(repo *repository.Container) *Container {
@@ -19,5 +20,6 @@ func NewContainer(repo *repository.Container) *Container {
 		Category:  NewCategoryService(repo.CategoryRepo, permSvc),
 		Warehouse: NewWarehouseService(repo.WarehouseRepo, permSvc),
 		Racks:     NewRacksService(repo.RacksRepo, permSvc),
+		Items:     NewItemsService(repo.ItemsRepo, permSvc),
 	}
 }
