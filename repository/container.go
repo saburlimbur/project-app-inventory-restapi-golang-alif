@@ -12,6 +12,7 @@ type Container struct {
 	WarehouseRepo WarehouseRepository
 	RacksRepo     RacksRepository
 	ItemsRepo     ItemsRepository
+	SaleRepo      SaleRepository
 
 	SessionRepo SessionRepository
 }
@@ -23,6 +24,7 @@ func NewContainer(db database.PgxIface, log *zap.Logger) *Container {
 		WarehouseRepo: NewWarehouseRepository(db, log),
 		RacksRepo:     NewRacksRepository(db, log),
 		ItemsRepo:     NewItemsRepository(db, log),
+		SaleRepo:      NewSaleRepository(db, log),
 
 		SessionRepo: NewSessionRepository(db),
 		// SessionRepo: NewSessionRepository(db, log),

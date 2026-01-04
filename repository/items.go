@@ -1,7 +1,6 @@
 package repository
 
 import (
-	"alfdwirhmn/inventory/database"
 	"alfdwirhmn/inventory/dto"
 	"alfdwirhmn/inventory/model"
 	"context"
@@ -15,14 +14,18 @@ type ItemsRepository interface {
 	Lists(page, limit int) ([]model.Item, int, error)
 	Update(ctx context.Context, id int, req dto.UpdateItemRequest) (*model.Item, error)
 	Delete(ctx context.Context, id int) error
+
+	FindByID(ctx context.Context, id int) (*model.Item, error)
+	ReduceStock(ctx context.Context, itemID int, qty int) error
 }
 
 type itemsRepository struct {
-	DB     database.PgxIface
+	DB DBTX
+	// DB     database.PgxIface
 	Logger *zap.Logger
 }
 
-func NewItemsRepository(db database.PgxIface, log *zap.Logger) ItemsRepository {
+func NewItemsRepository(db DBTX, log *zap.Logger) ItemsRepository {
 	return &itemsRepository{
 		DB:     db,
 		Logger: log,
@@ -257,6 +260,41 @@ func (r *itemsRepository) Delete(ctx context.Context, id int) error {
 
 	if result.RowsAffected() == 0 {
 		return errors.New("item not found or already delete")
+	}
+
+	return nil
+}
+
+func (r *itemsRepository) FindByID(ctx context.Context, id int) (*model.Item, error) {
+	q := `SELECT id, name, price, stock FROM items WHERE id=$1`
+
+	item := &model.Item{}
+	err := r.DB.QueryRow(ctx, q, id).Scan(
+		&item.ID,
+		&item.Name,
+		&item.Price,
+		&item.Stock,
+	)
+	if err != nil {
+		return nil, err
+	}
+	return item, nil
+}
+
+func (r *itemsRepository) ReduceStock(ctx context.Context, itemID, qty int) error {
+	q := `
+	UPDATE items
+	SET stock = stock - $1
+	WHERE id = $2 AND stock >= $1
+	`
+
+	res, err := r.DB.Exec(ctx, q, qty, itemID)
+	if err != nil {
+		return err
+	}
+
+	if res.RowsAffected() == 0 {
+		return errors.New("stock not enough")
 	}
 
 	return nil
