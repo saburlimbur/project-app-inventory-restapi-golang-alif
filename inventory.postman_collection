@@ -1,0 +1,2298 @@
+{
+	"info": {
+		"_postman_id": "339dce89-0b29-49ff-9e55-eb8013bbc81d",
+		"name": "INVENTORYS LMSV",
+		"description": "Endpoint client API for mini project Inventory Lumoshive Bootcamp",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "35964620"
+	},
+	"item": [
+		{
+			"name": "AUTHENTICATION",
+			"item": [
+				{
+					"name": "CREATE",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "// {\r\n//   \"username\": \"johnstaff\",\r\n//   \"email\": \"john.staff@company.com\",\r\n//   \"password\": \"secret123\",\r\n//   \"full_name\": \"John Staff\",\r\n//   \"role\": \"staff\"\r\n// }\r\n\r\n{\r\n    \"username\": \"admin\",\r\n    \"email\": \"admin@inventory.com\",\r\n    \"password\": \"secret321\",\r\n    \"full_name\": \"Admin Administrator\",\r\n    \"role\": \"admin\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{INVENTORY_API_URL}}/auth/register",
+							"host": [
+								"{{INVENTORY_API_URL}}"
+							],
+							"path": [
+								"auth",
+								"register"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "REGISTER RESPONSE",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"username\": \"johnstaff\",\r\n  \"email\": \"john.staff@company.com\",\r\n  \"password\": \"secret123\",\r\n  \"full_name\": \"John Staff\",\r\n  \"role\": \"staff\"\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/auth/register",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"auth",
+										"register"
+									],
+									"query": [
+										{
+											"key": "",
+											"value": null,
+											"disabled": true
+										}
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 30 Dec 2025 10:09:58 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "244"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": true,\n    \"message\": \"register success\",\n    \"data\": {\n        \"id\": 2,\n        \"username\": \"johnstaff\",\n        \"email\": \"john.staff@company.com\",\n        \"full_name\": \"John Staff\",\n        \"role\": \"staff\",\n        \"is_active\": true,\n        \"created_at\": \"2025-12-30 17:09:58\",\n        \"updated_at\": \"2025-12-30 17:09:58\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "LOGIN",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"identifier\": \"johnstaff\", // username atau email\r\n  \"password\": \"secret123\"\r\n}\r\n\r\n// {\r\n//     \"identifier\": \"admin@inventory.com\",\r\n//     \"password\": \"secret321\"\r\n// }"
+						},
+						"url": {
+							"raw": "{{INVENTORY_API_URL}}/auth/login",
+							"host": [
+								"{{INVENTORY_API_URL}}"
+							],
+							"path": [
+								"auth",
+								"login"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "LOGIN RESPONSE",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"identifier\": \"john.staff@company.com\",\r\n  \"password\": \"secret123\"\r\n}\r\n"
+								},
+								"url": {
+									"raw": "http://localhost:3000/auth/login",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"auth",
+										"login"
+									],
+									"query": [
+										{
+											"key": "",
+											"value": null,
+											"disabled": true
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 30 Dec 2025 10:16:50 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "338"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": true,\n    \"message\": \"login success\",\n    \"data\": {\n        \"token\": \"8caf2812-cb7b-4246-9f53-019953738d50\",\n        \"expired_at\": \"2025-12-31T17:16:50+07:00\",\n        \"user\": {\n            \"id\": 2,\n            \"username\": \"johnstaff\",\n            \"email\": \"john.staff@company.com\",\n            \"full_name\": \"John Staff\",\n            \"role\": \"staff\",\n            \"is_active\": true,\n            \"created_at\": \"2025-12-30 17:09:58\",\n            \"updated_at\": \"2025-12-30 17:09:58\"\n        }\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "SUPER ADMIN LOGIN",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"identifier\": \"superadmin@inventory.com\", // username atau email\r\n  \"password\": \"secretsuperadmin\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{INVENTORY_API_URL}}/auth/login",
+							"host": [
+								"{{INVENTORY_API_URL}}"
+							],
+							"path": [
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "RESPONSE SUPER ADMIN LOGIN",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"identifier\": \"superadmin@inventory.com\", // username atau email\r\n  \"password\": \"secretsuperadmin\"\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/auth/login",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"auth",
+										"login"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 30 Dec 2025 11:01:02 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "356"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": true,\n    \"message\": \"login success\",\n    \"data\": {\n        \"token\": \"16b3b9c6-1e6e-4aff-a646-f40f19a7a010\",\n        \"expired_at\": \"2025-12-31T18:01:02+07:00\",\n        \"user\": {\n            \"id\": 1,\n            \"username\": \"superadmin\",\n            \"email\": \"superadmin@inventory.com\",\n            \"full_name\": \"Super Administrator\",\n            \"role\": \"super_admin\",\n            \"is_active\": true,\n            \"created_at\": \"2025-12-30 16:24:13\",\n            \"updated_at\": \"2025-12-30 17:59:14\"\n        }\n    }\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "USERS",
+			"item": [
+				{
+					"name": "LIST USERS",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "43521023-6a85-4c76-9ae2-dfcd10775e7d",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{INVENTORY_API_URL}}/users?page=1",
+							"host": [
+								"{{INVENTORY_API_URL}}"
+							],
+							"path": [
+								"users"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "RESPONSE LIST USERS",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/v1/users?page=1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"v1",
+										"users"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"description": "",
+									"type": "text"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 02 Jan 2026 07:27:10 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "768"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": [\n        {\n            \"id\": 3,\n            \"username\": \"userfromsuperadmin\",\n            \"email\": \"userfromsuperadmin@company.com\",\n            \"full_name\": \"User From Super Admin\",\n            \"role\": \"staff\",\n            \"is_active\": true,\n            \"created_at\": \"2025-12-31T14:01:22.047577Z\",\n            \"updated_at\": \"0001-01-01T00:00:00Z\"\n        },\n        {\n            \"id\": 2,\n            \"username\": \"johnstaff\",\n            \"email\": \"john.staff@company.com\",\n            \"full_name\": \"John Staff\",\n            \"role\": \"staff\",\n            \"is_active\": true,\n            \"created_at\": \"2025-12-30T17:09:58.655162Z\",\n            \"updated_at\": \"0001-01-01T00:00:00Z\"\n        },\n        {\n            \"id\": 1,\n            \"username\": \"superadmin\",\n            \"email\": \"superadmin@inventory.com\",\n            \"full_name\": \"Super Administrator\",\n            \"role\": \"super_admin\",\n            \"is_active\": true,\n            \"created_at\": \"2025-12-30T16:24:13.626667Z\",\n            \"updated_at\": \"0001-01-01T00:00:00Z\"\n        }\n    ],\n    \"message\": \"success get data\",\n    \"pagination\": {\n        \"page\": 1,\n        \"limit\": 3,\n        \"total_rows\": 0,\n        \"total_pages\": 0\n    },\n    \"status\": true\n}"
+						}
+					]
+				},
+				{
+					"name": "CREATE USER (ADMIN)",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "0938dcbe-bbeb-4512-beee-430ba38abd74",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"username\": \"userfromsuperadmin\",\r\n  \"email\": \"userfromsuperadmin@company.com\",\r\n  \"password\": \"secret123\",\r\n  \"full_name\": \"User From Super Admin\",\r\n  \"role\": \"staff\"\r\n}\r\n"
+						},
+						"url": {
+							"raw": "{{INVENTORY_API_URL}}/users",
+							"host": [
+								"{{INVENTORY_API_URL}}"
+							],
+							"path": [
+								"users"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "RESPONSE CREATE USER FROM SUPER ADMIN",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"username\": \"userfromsuperadmin\",\r\n  \"email\": \"userfromsuperadmin@company.com\",\r\n  \"password\": \"secret123\",\r\n  \"full_name\": \"User From Super Admin\",\r\n  \"role\": \"staff\"\r\n}\r\n"
+								},
+								"url": {
+									"raw": "http://localhost:3000/v1/users/create",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"v1",
+										"users",
+										"create"
+									],
+									"query": [
+										{
+											"key": "",
+											"value": null,
+											"disabled": true
+										}
+									]
+								}
+							},
+							"status": "Forbidden",
+							"code": 403,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"description": "",
+									"type": "text"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 01 Jan 2026 08:45:32 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "50"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": false,\n    \"message\": \"email already exists\"\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "CATEGORIES",
+			"item": [
+				{
+					"name": "CREATE CATEGORY",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "43521023-6a85-4c76-9ae2-dfcd10775e7d",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"code\": \"TS001\",\r\n  \"name\": \"Test categorys\",\r\n  \"description\": \"Kategori untuk testing method saja\",\r\n  \"is_active\": true\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{INVENTORY_API_URL}}/categories",
+							"host": [
+								"{{INVENTORY_API_URL}}"
+							],
+							"path": [
+								"categories"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "RESPONSE CREATE CATEGORIES",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"code\": \"FUR001\",\r\n  \"name\": \"Furniture\",\r\n  \"description\": \"Kategori untuk perabotan seperti meja, kursi, dan lemari\",\r\n  \"is_active\": true\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/v1/categories",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"v1",
+										"categories"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"description": "",
+									"type": "text"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 02 Jan 2026 10:43:13 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "300"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": true,\n    \"message\": \"Category created successfully\",\n    \"data\": {\n        \"id\": 3,\n        \"code\": \"FUR001\",\n        \"name\": \"Furniture\",\n        \"description\": \"Kategori untuk perabotan seperti meja, kursi, dan lemari\",\n        \"is_active\": true,\n        \"created_by\": 1,\n        \"created_at\": \"2026-01-02T17:43:13.088278Z\",\n        \"updated_at\": \"2026-01-02T17:43:13.088278Z\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "LIST CATEGORY",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "005f5a6b-0b4a-4b1e-8fa7-2dd4f75cb4af",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{INVENTORY_API_URL}}/categories?page=1",
+							"host": [
+								"{{INVENTORY_API_URL}}"
+							],
+							"path": [
+								"categories"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "RESPONSE LIST CATEGORY",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{INVENTORY_API_URL}}/categories?page=1",
+									"host": [
+										"{{INVENTORY_API_URL}}"
+									],
+									"path": [
+										"categories"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"description": "",
+									"type": "text"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 03 Jan 2026 15:55:49 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "844"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": true,\n    \"message\": \"succesfully get category data\",\n    \"data\": [\n        {\n            \"id\": 4,\n            \"code\": \"TS001\",\n            \"name\": \"Test categorys updated\",\n            \"description\": \"Kategori untuk testing method saja\",\n            \"is_active\": false,\n            \"created_by\": 5,\n            \"created_at\": \"2026-01-03T20:30:38.971875Z\",\n            \"updated_at\": \"2026-01-03T21:42:30.396664Z\"\n        },\n        {\n            \"id\": 3,\n            \"code\": \"FUR001\",\n            \"name\": \"Furniture\",\n            \"description\": \"Kategori untuk perabotan seperti meja, kursi, dan lemari\",\n            \"is_active\": true,\n            \"created_by\": 1,\n            \"created_at\": \"2026-01-02T17:43:13.088278Z\",\n            \"updated_at\": \"2026-01-02T17:43:13.088278Z\"\n        },\n        {\n            \"id\": 2,\n            \"code\": \"ATK001\",\n            \"name\": \"Alat Tulis Kantor\",\n            \"description\": \"Kategori untuk perlengkapan alat tulis dan kebutuhan perkantoran\",\n            \"is_active\": true,\n            \"created_by\": 1,\n            \"created_at\": \"2026-01-02T17:39:36.361915Z\",\n            \"updated_at\": \"2026-01-02T17:39:36.361915Z\"\n        }\n    ],\n    \"pagination\": {\n        \"page\": 1,\n        \"limit\": 3,\n        \"total_rows\": 4,\n        \"total_pages\": 2\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "UPDATE CATEGORY",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "43521023-6a85-4c76-9ae2-dfcd10775e7d",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"code\": \"TS001\",\r\n  \"name\": \"Test categorys updated\",\r\n  \"description\": \"Kategori untuk testing method saja\",\r\n  \"is_active\": true\r\n}\r\n"
+						},
+						"url": {
+							"raw": "{{INVENTORY_API_URL}}/categories/4",
+							"host": [
+								"{{INVENTORY_API_URL}}"
+							],
+							"path": [
+								"categories",
+								"4"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "RESPONSE UPDATE CATEGORY",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"code\": \"TS001\",\r\n  \"name\": \"Test categorys updated true\",\r\n  \"description\": \"Kategori untuk testing method saja\",\r\n  \"is_active\": true\r\n}\r\n"
+								},
+								"url": {
+									"raw": "{{INVENTORY_API_URL}}/categories/4",
+									"host": [
+										"{{INVENTORY_API_URL}}"
+									],
+									"path": [
+										"categories",
+										"4"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"description": "",
+									"type": "text"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 03 Jan 2026 14:15:07 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "295"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": true,\n    \"message\": \"category updated successfully\",\n    \"data\": {\n        \"id\": 4,\n        \"code\": \"TS001\",\n        \"name\": \"Test categorys updated true\",\n        \"description\": \"Kategori untuk testing method saja\",\n        \"is_active\": true,\n        \"created_by\": 5,\n        \"created_at\": \"2026-01-03T20:30:38.971875Z\",\n        \"updated_at\": \"2026-01-03T21:15:07.226656Z\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "DELETE CATEGORY BY ID",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "212f5201-1457-4c55-ac1b-7f94a9aa803f",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{INVENTORY_API_URL}}/categories/4",
+							"host": [
+								"{{INVENTORY_API_URL}}"
+							],
+							"path": [
+								"categories",
+								"4"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "RESPONSE DELETE CATEGORY BY ID",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{INVENTORY_API_URL}}/categories/4",
+									"host": [
+										"{{INVENTORY_API_URL}}"
+									],
+									"path": [
+										"categories",
+										"4"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"description": "",
+									"type": "text"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 03 Jan 2026 14:42:30 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "67"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": true,\n    \"message\": \"category deleted successfully\",\n    \"data\": 4\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "WAREHOUSE",
+			"item": [
+				{
+					"name": "CREATE WAREHOUSE",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "78a57d61-e9d8-4c9f-9dda-9ac1ea9b0986",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"code\": \"DPR-001\",\r\n  \"name\": \"Gudang DPR\",\r\n  \"address\": \"Jl. Kencana No. 10\",\r\n  \"city\": \"Neraka\",\r\n  \"province\": \"Neraka paling bawah\",\r\n  \"postal_code\": \"13121\",\r\n  \"phone\": \"0217891111\"\r\n}\r\n"
+						},
+						"url": {
+							"raw": "{{INVENTORY_API_URL}}/warehouse",
+							"host": [
+								"{{INVENTORY_API_URL}}"
+							],
+							"path": [
+								"warehouse"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "RESPONSE CREATE WAREHOUSE",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"code\": \"WH-001\",\r\n  \"name\": \"Gudang Utama\",\r\n  \"address\": \"Jl. Industri No. 10\",\r\n  \"city\": \"Jakarta\",\r\n  \"province\": \"DKI Jakarta\",\r\n  \"postal_code\": \"12950\",\r\n  \"phone\": \"0217891234\"\r\n}\r\n"
+								},
+								"url": {
+									"raw": "{{INVENTORY_API_URL}}/warehouse",
+									"host": [
+										"{{INVENTORY_API_URL}}"
+									],
+									"path": [
+										"warehouse"
+									],
+									"query": [
+										{
+											"key": "",
+											"value": null,
+											"disabled": true
+										}
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"description": "",
+									"type": "text"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 03 Jan 2026 15:33:27 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "348"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": true,\n    \"message\": \"Warehouse created successfully\",\n    \"data\": {\n        \"id\": 1,\n        \"code\": \"WH-001\",\n        \"name\": \"Gudang Utama\",\n        \"address\": \"Jl. Industri No. 10\",\n        \"city\": \"Jakarta\",\n        \"province\": \"DKI Jakarta\",\n        \"postal_code\": \"12950\",\n        \"phone\": \"0217891234\",\n        \"is_active\": true,\n        \"created_by\": 1,\n        \"created_at\": \"2026-01-03T22:33:27.147194Z\",\n        \"updated_at\": \"2026-01-03T22:33:27.147194Z\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "LIST WAREHOUSES",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "9c9bc59e-ac1c-4616-a433-51b85262905d",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{INVENTORY_API_URL}}/warehouse?page=1",
+							"host": [
+								"{{INVENTORY_API_URL}}"
+							],
+							"path": [
+								"warehouse"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "RESPONSE LIST WAREHOUSES",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{INVENTORY_API_URL}}/warehouse?page=1",
+									"host": [
+										"{{INVENTORY_API_URL}}"
+									],
+									"path": [
+										"warehouse"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"description": "",
+									"type": "text"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 03 Jan 2026 15:55:42 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "410"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": true,\n    \"message\": \"succesfully get warehouse data\",\n    \"data\": [\n        {\n            \"ID\": 1,\n            \"Code\": \"WH-001\",\n            \"Name\": \"Gudang Utama\",\n            \"Address\": \"Jl. Industri No. 10\",\n            \"City\": \"Jakarta\",\n            \"Province\": \"DKI Jakarta\",\n            \"PostalCode\": \"12950\",\n            \"Phone\": \"0217891234\",\n            \"IsActive\": true,\n            \"CreatedBy\": 1,\n            \"CreatedAt\": \"2026-01-03T22:33:27.147194Z\",\n            \"UpdatedAt\": \"2026-01-03T22:33:27.147194Z\"\n        }\n    ],\n    \"pagination\": {\n        \"page\": 1,\n        \"limit\": 3,\n        \"total_rows\": 1,\n        \"total_pages\": 1\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "UPDATE WAREHOUSES",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "818a6462-9530-4918-94b6-94100fcff21d",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"code\": \"WH-001\",\r\n  \"name\": \"Gudang Utama update\",\r\n  \"address\": \"Jl. Industri No. 10\",\r\n  \"city\": \"Jakarta\",\r\n  \"province\": \"DKI Jakarta\",\r\n  \"postal_code\": \"12950\",\r\n  \"phone\": \"0217891234\",\r\n  \"is_active\": true\r\n}"
+						},
+						"url": {
+							"raw": "{{INVENTORY_API_URL}}/warehouse/1",
+							"host": [
+								"{{INVENTORY_API_URL}}"
+							],
+							"path": [
+								"warehouse",
+								"1"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "RESPONSE UPDATE WAREHOUSES",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"code\": \"WH-001\",\r\n  \"name\": \"Gudang Utama update\",\r\n  \"address\": \"Jl. Industri No. 10\",\r\n  \"city\": \"Jakarta\",\r\n  \"province\": \"DKI Jakarta\",\r\n  \"postal_code\": \"12950\",\r\n  \"phone\": \"0217891234\",\r\n  \"is_active\": true\r\n}"
+								},
+								"url": {
+									"raw": "{{INVENTORY_API_URL}}/warehouse/1",
+									"host": [
+										"{{INVENTORY_API_URL}}"
+									],
+									"path": [
+										"warehouse",
+										"1"
+									],
+									"query": [
+										{
+											"key": "",
+											"value": null,
+											"disabled": true
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"description": "",
+									"type": "text"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 03 Jan 2026 17:37:08 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "354"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": true,\n    \"message\": \"warehouse updated successfully\",\n    \"data\": {\n        \"id\": 1,\n        \"code\": \"WH-001\",\n        \"name\": \"Gudang Utama update\",\n        \"address\": \"Jl. Industri No. 10\",\n        \"city\": \"Jakarta\",\n        \"province\": \"DKI Jakarta\",\n        \"postal_code\": \"12950\",\n        \"phone\": \"0217891234\",\n        \"is_active\": true,\n        \"created_by\": 1,\n        \"created_at\": \"2026-01-03T22:33:27.147194Z\",\n        \"updated_at\": \"2026-01-04T00:37:08.07825Z\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "DELETE WAREHOUSE",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "818a6462-9530-4918-94b6-94100fcff21d",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{INVENTORY_API_URL}}/warehouse/3",
+							"host": [
+								"{{INVENTORY_API_URL}}"
+							],
+							"path": [
+								"warehouse",
+								"3"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "RESPONSE DELETE WAREHOUSE",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{INVENTORY_API_URL}}/warehouse/3",
+									"host": [
+										"{{INVENTORY_API_URL}}"
+									],
+									"path": [
+										"warehouse",
+										"3"
+									],
+									"query": [
+										{
+											"key": "",
+											"value": null,
+											"disabled": true
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"description": "",
+									"type": "text"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 03 Jan 2026 17:46:08 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "69"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": true,\n    \"message\": \"warehouses deleted successfully\",\n    \"data\": 3\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "RACKS",
+			"item": [
+				{
+					"name": "CREATE RACKS",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "78a57d61-e9d8-4c9f-9dda-9ac1ea9b0986",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"warehouse_id\": 2,\r\n  \"code\": \"JKW-001\",\r\n  \"name\": \"Rack Test\",\r\n  \"location\": \"Lantai 2 - Zona Merah\",\r\n  \"capacity\": 200,\r\n  \"description\": \"Rak untuk test saja\"\r\n}\r\n"
+						},
+						"url": {
+							"raw": "{{INVENTORY_API_URL}}/racks",
+							"host": [
+								"{{INVENTORY_API_URL}}"
+							],
+							"path": [
+								"racks"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "RESPONSE CREATE RACKS",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"warehouse_id\": 2,\r\n  \"code\": \"RCK-003\",\r\n  \"name\": \"Rack C\",\r\n  \"location\": \"Lantai 2 - Zona C\",\r\n  \"capacity\": 200,\r\n  \"description\": \"Rak untuk menyimpan barang alat tulis\"\r\n}\r\n"
+								},
+								"url": {
+									"raw": "{{INVENTORY_API_URL}}/racks",
+									"host": [
+										"{{INVENTORY_API_URL}}"
+									],
+									"path": [
+										"racks"
+									],
+									"query": [
+										{
+											"key": "",
+											"value": null,
+											"disabled": true
+										}
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"description": "",
+									"type": "text"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 03 Jan 2026 18:24:02 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "338"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": true,\n    \"message\": \"Rack created successfully\",\n    \"data\": {\n        \"id\": 3,\n        \"warehouse_id\": 2,\n        \"code\": \"RCK-003\",\n        \"name\": \"Rack C\",\n        \"location\": \"Lantai 2 - Zona C\",\n        \"capacity\": 200,\n        \"description\": \"Rak untuk menyimpan barang alat tulis\",\n        \"is_active\": true,\n        \"created_by\": 1,\n        \"created_at\": \"2026-01-04T01:24:02.445008Z\",\n        \"updated_at\": \"2026-01-04T01:24:02.445008Z\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "LISTS RACKS",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "78a57d61-e9d8-4c9f-9dda-9ac1ea9b0986",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"warehouse_id\": 2,\r\n  \"code\": \"RCK-003\",\r\n  \"name\": \"Rack C\",\r\n  \"location\": \"Lantai 2 - Zona C\",\r\n  \"capacity\": 200,\r\n  \"description\": \"Rak untuk menyimpan barang alat tulis\"\r\n}\r\n"
+						},
+						"url": {
+							"raw": "{{INVENTORY_API_URL}}/racks?page=1",
+							"host": [
+								"{{INVENTORY_API_URL}}"
+							],
+							"path": [
+								"racks"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "RESPONSE LISTS RACKS",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"warehouse_id\": 2,\r\n  \"code\": \"RCK-003\",\r\n  \"name\": \"Rack C\",\r\n  \"location\": \"Lantai 2 - Zona C\",\r\n  \"capacity\": 200,\r\n  \"description\": \"Rak untuk menyimpan barang alat tulis\"\r\n}\r\n"
+								},
+								"url": {
+									"raw": "{{INVENTORY_API_URL}}/racks?page=1",
+									"host": [
+										"{{INVENTORY_API_URL}}"
+									],
+									"path": [
+										"racks"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"description": "",
+									"type": "text"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 03 Jan 2026 18:24:54 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "944"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": true,\n    \"message\": \"successfully get rack data\",\n    \"data\": [\n        {\n            \"ID\": 3,\n            \"WarehouseID\": 2,\n            \"Code\": \"RCK-003\",\n            \"Name\": \"Rack C\",\n            \"Location\": \"Lantai 2 - Zona C\",\n            \"Capacity\": 200,\n            \"Description\": \"Rak untuk menyimpan barang alat tulis\",\n            \"IsActive\": true,\n            \"CreatedBy\": 1,\n            \"CreatedAt\": \"2026-01-04T01:24:02.445008Z\",\n            \"UpdatedAt\": \"2026-01-04T01:24:02.445008Z\"\n        },\n        {\n            \"ID\": 2,\n            \"WarehouseID\": 1,\n            \"Code\": \"RCK-002\",\n            \"Name\": \"Rack B\",\n            \"Location\": \"Lantai 1 - Zona B\",\n            \"Capacity\": 150,\n            \"Description\": \"Rak untuk menyimpan barang furniture\",\n            \"IsActive\": true,\n            \"CreatedBy\": 1,\n            \"CreatedAt\": \"2026-01-04T01:23:47.789956Z\",\n            \"UpdatedAt\": \"2026-01-04T01:23:47.789956Z\"\n        },\n        {\n            \"ID\": 1,\n            \"WarehouseID\": 1,\n            \"Code\": \"RCK-001\",\n            \"Name\": \"Rack A\",\n            \"Location\": \"Lantai 1 - Zona A\",\n            \"Capacity\": 100,\n            \"Description\": \"Rak untuk menyimpan barang elektronik\",\n            \"IsActive\": true,\n            \"CreatedBy\": 1,\n            \"CreatedAt\": \"2026-01-04T01:23:27.526103Z\",\n            \"UpdatedAt\": \"2026-01-04T01:23:27.526103Z\"\n        }\n    ],\n    \"pagination\": {\n        \"page\": 1,\n        \"limit\": 3,\n        \"total_rows\": 3,\n        \"total_pages\": 1\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "UPDATE RACKS",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "78a57d61-e9d8-4c9f-9dda-9ac1ea9b0986",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n//   \"warehouse_id\": 3,\r\n  \"code\": \"RCK-003\",\r\n  \"name\": \"Rack C update\",\r\n  \"location\": \"Lantai 2 - Zona C\",\r\n  \"capacity\": 210,\r\n  \"description\": \"Rak untuk menyimpan barang alat tulis update\",\r\n  \"is_active\": true\r\n}\r\n"
+						},
+						"url": {
+							"raw": "{{INVENTORY_API_URL}}/racks/3",
+							"host": [
+								"{{INVENTORY_API_URL}}"
+							],
+							"path": [
+								"racks",
+								"3"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "RESPONSE UPDATE RACKS",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n//   \"warehouse_id\": 3,\r\n  \"code\": \"RCK-003\",\r\n  \"name\": \"Rack C update\",\r\n  \"location\": \"Lantai 2 - Zona C\",\r\n  \"capacity\": 210,\r\n  \"description\": \"Rak untuk menyimpan barang alat tulis update\",\r\n  \"is_active\": true\r\n}\r\n"
+								},
+								"url": {
+									"raw": "{{INVENTORY_API_URL}}/racks/3",
+									"host": [
+										"{{INVENTORY_API_URL}}"
+									],
+									"path": [
+										"racks",
+										"3"
+									],
+									"query": [
+										{
+											"key": "",
+											"value": null,
+											"disabled": true
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"description": "",
+									"type": "text"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 03 Jan 2026 18:27:07 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "352"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": true,\n    \"message\": \"rack updated successfully\",\n    \"data\": {\n        \"id\": 3,\n        \"warehouse_id\": 2,\n        \"code\": \"RCK-003\",\n        \"name\": \"Rack C update\",\n        \"location\": \"Lantai 2 - Zona C\",\n        \"capacity\": 210,\n        \"description\": \"Rak untuk menyimpan barang alat tulis update\",\n        \"is_active\": true,\n        \"created_by\": 1,\n        \"created_at\": \"2026-01-04T01:24:02.445008Z\",\n        \"updated_at\": \"2026-01-04T01:27:07.606347Z\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "DELETE RACKS",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "78a57d61-e9d8-4c9f-9dda-9ac1ea9b0986",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n//   \"warehouse_id\": 3,\r\n  \"code\": \"RCK-003\",\r\n  \"name\": \"Rack C update\",\r\n  \"location\": \"Lantai 2 - Zona C\",\r\n  \"capacity\": 210,\r\n  \"description\": \"Rak untuk menyimpan barang alat tulis update\",\r\n  \"is_active\": true\r\n}\r\n"
+						},
+						"url": {
+							"raw": "{{INVENTORY_API_URL}}/racks/4",
+							"host": [
+								"{{INVENTORY_API_URL}}"
+							],
+							"path": [
+								"racks",
+								"4"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "RESPONSE DELETE RACKS",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n//   \"warehouse_id\": 3,\r\n  \"code\": \"RCK-003\",\r\n  \"name\": \"Rack C update\",\r\n  \"location\": \"Lantai 2 - Zona C\",\r\n  \"capacity\": 210,\r\n  \"description\": \"Rak untuk menyimpan barang alat tulis update\",\r\n  \"is_active\": true\r\n}\r\n"
+								},
+								"url": {
+									"raw": "{{INVENTORY_API_URL}}/racks/4",
+									"host": [
+										"{{INVENTORY_API_URL}}"
+									],
+									"path": [
+										"racks",
+										"4"
+									],
+									"query": [
+										{
+											"key": "",
+											"value": null,
+											"disabled": true
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"description": "",
+									"type": "text"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 03 Jan 2026 18:31:11 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "63"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": true,\n    \"message\": \"rack deleted successfully\",\n    \"data\": 4\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "ITEMS",
+			"item": [
+				{
+					"name": "CREATE ITEM",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "005f5a6b-0b4a-4b1e-8fa7-2dd4f75cb4af",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"category_id\": 2,\r\n  \"rack_id\": 3,\r\n  \"sku\": \"ASL-003-ASAL-A5\",\r\n  \"name\": \"Asal Tulis\",\r\n  \"description\": \"Buku asal tulis ukuran A5, 40 lembar, kertas HVS\",\r\n  \"unit\": \"pcs\",\r\n  \"price\": 22000,\r\n  \"cost\": 2500,\r\n  \"stock\": 15,\r\n  \"minimum_stock\": 30,\r\n  \"weight\": 0.15,\r\n  \"dimensions\": \"21x15x1\",\r\n  \"is_active\": true\r\n}\r\n"
+						},
+						"url": {
+							"raw": "{{INVENTORY_API_URL}}/items",
+							"host": [
+								"{{INVENTORY_API_URL}}"
+							],
+							"path": [
+								"items"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "RESPONSE CREATE ITEM",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"category_id\": 2,\r\n  \"rack_id\": 3,\r\n  \"sku\": \"ATK-001-PULPEN\",\r\n  \"name\": \"Pulpen Gel Hitam\",\r\n  \"description\": \"Pulpen gel tinta hitam, ujung 0.5 mm, cocok untuk kebutuhan kantor\",\r\n  \"unit\": \"pcs\",\r\n  \"price\": 5000,\r\n  \"cost\": 3000,\r\n  \"stock\": 250,\r\n  \"minimum_stock\": 50,\r\n  \"weight\": 0.02,\r\n  \"dimensions\": \"14x1x1\",\r\n  \"is_active\": true\r\n}\r\n"
+								},
+								"url": {
+									"raw": "{{INVENTORY_API_URL}}/items",
+									"host": [
+										"{{INVENTORY_API_URL}}"
+									],
+									"path": [
+										"items"
+									],
+									"query": [
+										{
+											"key": "",
+											"value": null,
+											"disabled": true
+										}
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"description": "",
+									"type": "text"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 04 Jan 2026 12:05:18 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "442"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": true,\n    \"message\": \"Category created successfully\",\n    \"data\": {\n        \"id\": 1,\n        \"category_id\": 2,\n        \"sku\": \"ATK-001-PULPEN\",\n        \"name\": \"Pulpen Gel Hitam\",\n        \"description\": \"Pulpen gel tinta hitam, ujung 0.5 mm, cocok untuk kebutuhan kantor\",\n        \"unit\": \"pcs\",\n        \"price\": 5000,\n        \"cost\": 3000,\n        \"stock\": 250,\n        \"minimum_stock\": 50,\n        \"weight\": 0,\n        \"dimensions\": \"14x1x1\",\n        \"is_active\": true,\n        \"created_by\": 1,\n        \"created_at\": \"2026-01-04T19:05:18.222682Z\",\n        \"updated_at\": \"2026-01-04T19:05:18.222682Z\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "LISTS ITEMS",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "005f5a6b-0b4a-4b1e-8fa7-2dd4f75cb4af",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{INVENTORY_API_URL}}/items?page=1",
+							"host": [
+								"{{INVENTORY_API_URL}}"
+							],
+							"path": [
+								"items"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "RESPONSE LISTS ITEMS",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{INVENTORY_API_URL}}/items?page=1",
+									"host": [
+										"{{INVENTORY_API_URL}}"
+									],
+									"path": [
+										"items"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"description": "",
+									"type": "text"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 04 Jan 2026 12:21:34 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "1267"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": true,\n    \"message\": \"succesfully get items data\",\n    \"data\": [\n        {\n            \"ID\": 3,\n            \"CategoryID\": 2,\n            \"RackID\": 3,\n            \"SKU\": \"ATK-003-BUKU-A5\",\n            \"Name\": \"Buku Tulis A5 40 Lembar\",\n            \"Description\": \"Buku tulis ukuran A5, 40 lembar, kertas HVS\",\n            \"Unit\": \"pcs\",\n            \"Price\": 12000,\n            \"Cost\": 8500,\n            \"Stock\": 150,\n            \"MinimumStock\": 30,\n            \"Weight\": 0,\n            \"Dimensions\": \"21x15x1\",\n            \"IsActive\": true,\n            \"created_by\": 1,\n            \"CreatedAt\": \"2026-01-04T19:21:31.602527Z\",\n            \"UpdatedAt\": \"2026-01-04T19:21:31.602527Z\"\n        },\n        {\n            \"ID\": 2,\n            \"CategoryID\": 2,\n            \"RackID\": 3,\n            \"SKU\": \"ATK-002-PULPEN-BIRU\",\n            \"Name\": \"Pulpen Gel Biru\",\n            \"Description\": \"Pulpen gel tinta biru, ujung 0.5 mm, nyaman untuk menulis harian\",\n            \"Unit\": \"pcs\",\n            \"Price\": 4500,\n            \"Cost\": 2800,\n            \"Stock\": 300,\n            \"MinimumStock\": 60,\n            \"Weight\": 0,\n            \"Dimensions\": \"14x1x1\",\n            \"IsActive\": true,\n            \"created_by\": 1,\n            \"CreatedAt\": \"2026-01-04T19:21:19.857357Z\",\n            \"UpdatedAt\": \"2026-01-04T19:21:19.857357Z\"\n        },\n        {\n            \"ID\": 1,\n            \"CategoryID\": 2,\n            \"RackID\": 3,\n            \"SKU\": \"ATK-001-PULPEN\",\n            \"Name\": \"Pulpen Gel Hitam\",\n            \"Description\": \"Pulpen gel tinta hitam, ujung 0.5 mm, cocok untuk kebutuhan kantor\",\n            \"Unit\": \"pcs\",\n            \"Price\": 5000,\n            \"Cost\": 3000,\n            \"Stock\": 250,\n            \"MinimumStock\": 50,\n            \"Weight\": 0,\n            \"Dimensions\": \"14x1x1\",\n            \"IsActive\": true,\n            \"created_by\": 1,\n            \"CreatedAt\": \"2026-01-04T19:05:18.222682Z\",\n            \"UpdatedAt\": \"2026-01-04T19:05:18.222682Z\"\n        }\n    ],\n    \"pagination\": {\n        \"page\": 1,\n        \"limit\": 3,\n        \"total_rows\": 0,\n        \"total_pages\": 1\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "UPDATE ITEMS",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "005f5a6b-0b4a-4b1e-8fa7-2dd4f75cb4af",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"category_id\": 2,\r\n  \"rack_id\": 3,\r\n  \"sku\": \"ATK-003-BUKU-A5\",\r\n  \"name\": \"Buku Tulis A5 40 Lembar Update\",\r\n  \"description\": \"Buku tulis ukuran A5, 40 lembar, kertas HVS\",\r\n  \"unit\": \"pcs\",\r\n  \"price\": 12000,\r\n  \"cost\": 8500,\r\n  \"stock\": 150,\r\n  \"minimum_stock\": 30,\r\n  \"weight\": 0.15,\r\n  \"dimensions\": \"21x15x1\",\r\n  \"is_active\": true\r\n}\r\n"
+						},
+						"url": {
+							"raw": "{{INVENTORY_API_URL}}/items/3",
+							"host": [
+								"{{INVENTORY_API_URL}}"
+							],
+							"path": [
+								"items",
+								"3"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "RESPONSE UPDATE ITEMS",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"category_id\": 2,\r\n  \"rack_id\": 3,\r\n  \"sku\": \"ATK-003-BUKU-A5\",\r\n  \"name\": \"Buku Tulis A5 40 Lembar Update\",\r\n  \"description\": \"Buku tulis ukuran A5, 40 lembar, kertas HVS\",\r\n  \"unit\": \"pcs\",\r\n  \"price\": 12000,\r\n  \"cost\": 8500,\r\n  \"stock\": 150,\r\n  \"minimum_stock\": 30,\r\n  \"weight\": 0.15,\r\n  \"dimensions\": \"21x15x1\",\r\n  \"is_active\": true\r\n}\r\n"
+								},
+								"url": {
+									"raw": "{{INVENTORY_API_URL}}/items/3",
+									"host": [
+										"{{INVENTORY_API_URL}}"
+									],
+									"path": [
+										"items",
+										"3"
+									],
+									"query": [
+										{
+											"key": "",
+											"value": null,
+											"disabled": true
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"description": "",
+									"type": "text"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 04 Jan 2026 13:09:36 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "447"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": true,\n    \"message\": \"item updated successfully\",\n    \"data\": {\n        \"id\": 3,\n        \"category_id\": 2,\n        \"rack_id\": 3,\n        \"sku\": \"ATK-003-BUKU-A5\",\n        \"name\": \"Buku Tulis A5 40 Lembar Update\",\n        \"description\": \"Buku tulis ukuran A5, 40 lembar, kertas HVS\",\n        \"unit\": \"pcs\",\n        \"price\": 12000,\n        \"cost\": 8500,\n        \"stock\": 150,\n        \"minimum_stock\": 30,\n        \"weight\": 0.15,\n        \"dimensions\": \"21x15x1\",\n        \"is_active\": true,\n        \"created_by\": 1,\n        \"created_at\": \"2026-01-04T19:21:31.602527Z\",\n        \"updated_at\": \"2026-01-04T20:09:36.172746Z\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "DELETE ITEM",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "594e399d-276b-444e-b404-9e1afe652c35",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{INVENTORY_API_URL}}/items/4",
+							"host": [
+								"{{INVENTORY_API_URL}}"
+							],
+							"path": [
+								"items",
+								"4"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "RESPONSE DELETE ITEM",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{INVENTORY_API_URL}}/items/4",
+									"host": [
+										"{{INVENTORY_API_URL}}"
+									],
+									"path": [
+										"items",
+										"4"
+									],
+									"query": [
+										{
+											"key": "",
+											"value": null,
+											"disabled": true
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"description": "",
+									"type": "text"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 04 Jan 2026 13:21:25 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "63"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": true,\n    \"message\": \"item deleted successfully\",\n    \"data\": 4\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "SALE",
+			"item": [
+				{
+					"name": "LISTS SALE",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "594e399d-276b-444e-b404-9e1afe652c35",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"invoice_number\": \"INV-001\",\r\n  \"customer_name\": \"Budi\",\r\n  \"customer_phone\": \"08123456789\",\r\n  \"customer_email\": \"budi@mail.com\",\r\n  \"items\": [\r\n    {\"item_id\": 1, \"quantity\": 2, \"discount\": 0},\r\n    {\"item_id\": 2, \"quantity\": 1, \"discount\": 5000}\r\n  ],\r\n  \"discount\": 0,\r\n  \"tax\": 10000,\r\n  \"payment_method\": \"cash\",\r\n  \"notes\": \"Pembelian offline\"\r\n}"
+						},
+						"url": {
+							"raw": "{{INVENTORY_API_URL}}/sale?page=1",
+							"host": [
+								"{{INVENTORY_API_URL}}"
+							],
+							"path": [
+								"sale"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "RESPONSE LISTS SALE",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{INVENTORY_API_URL}}/sale?page=1",
+									"host": [
+										"{{INVENTORY_API_URL}}"
+									],
+									"path": [
+										"sale"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 04 Jan 2026 16:57:00 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "1239"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": true,\n    \"message\": \"succesfully get sale data\",\n    \"data\": [\n        {\n            \"ID\": 4,\n            \"InvoiceNumber\": \"INV-20260105-001\",\n            \"CustomerName\": \"Siti Aminah\",\n            \"CustomerPhone\": null,\n            \"CustomerEmail\": null,\n            \"SaleDate\": \"2026-01-04T23:55:49.473379Z\",\n            \"TotalAmount\": 2750000,\n            \"Discount\": 250000,\n            \"Tax\": 275000,\n            \"GrandTotal\": 2775000,\n            \"PaymentMethod\": \"transfer\",\n            \"PaymentStatus\": \"pending\",\n            \"Notes\": null,\n            \"CreatedAt\": \"2026-01-04T23:55:49.473379Z\",\n            \"UpdatedAt\": \"0001-01-01T00:00:00Z\"\n        },\n        {\n            \"ID\": 3,\n            \"InvoiceNumber\": \"INV-20260104-002\",\n            \"CustomerName\": \"Budi Santoso\",\n            \"CustomerPhone\": null,\n            \"CustomerEmail\": null,\n            \"SaleDate\": \"2026-01-04T23:53:16.973214Z\",\n            \"TotalAmount\": 1500000,\n            \"Discount\": 50000,\n            \"Tax\": 150000,\n            \"GrandTotal\": 1600000,\n            \"PaymentMethod\": \"cash\",\n            \"PaymentStatus\": \"pending\",\n            \"Notes\": null,\n            \"CreatedAt\": \"2026-01-04T23:53:16.973214Z\",\n            \"UpdatedAt\": \"0001-01-01T00:00:00Z\"\n        },\n        {\n            \"ID\": 1,\n            \"InvoiceNumber\": \"INV-20260104-001\",\n            \"CustomerName\": \"Budi Santoso\",\n            \"CustomerPhone\": null,\n            \"CustomerEmail\": null,\n            \"SaleDate\": \"2026-01-04T21:27:14.980615Z\",\n            \"TotalAmount\": 1500000,\n            \"Discount\": 50000,\n            \"Tax\": 150000,\n            \"GrandTotal\": 1600000,\n            \"PaymentMethod\": \"cash\",\n            \"PaymentStatus\": \"pending\",\n            \"Notes\": null,\n            \"CreatedAt\": \"2026-01-04T21:27:14.980615Z\",\n            \"UpdatedAt\": \"0001-01-01T00:00:00Z\"\n        }\n    ],\n    \"pagination\": {\n        \"page\": 1,\n        \"limit\": 3,\n        \"total_rows\": 3,\n        \"total_pages\": 1\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "CREATE SALE (TRANSACTION)",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "594e399d-276b-444e-b404-9e1afe652c35",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"invoice_number\": \"INV-002\",\r\n  \"customer_name\": \"Siti\",\r\n  \"customer_phone\": \"081234567890\",\r\n  \"customer_email\": \"siti@mail.com\",\r\n  \"items\": [\r\n    {\r\n        \"item_id\": 1, \r\n        \"quantity\": 20,\r\n        \"discount\": 0\r\n    },\r\n    {\r\n        \"item_id\": 2, \r\n        \"quantity\": 10, \r\n        \"discount\": 5000\r\n    }\r\n  ],\r\n  \"discount\": 0,\r\n  \"tax\": 10000,\r\n  \"payment_method\": \"cash\",\r\n  \"notes\": \"Pembelian offline\"\r\n}\r\n"
+						},
+						"url": {
+							"raw": "{{INVENTORY_API_URL}}/sale",
+							"host": [
+								"{{INVENTORY_API_URL}}"
+							],
+							"path": [
+								"sale"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "CREATE SALE (TRANSACTION)",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"invoice_number\": \"INV-002\",\r\n  \"customer_name\": \"Siti\",\r\n  \"customer_phone\": \"081234567890\",\r\n  \"customer_email\": \"siti@mail.com\",\r\n  \"items\": [\r\n    {\r\n        \"item_id\": 1, \r\n        \"quantity\": 20, \r\n        \"discount\": 0\r\n    },\r\n    {\r\n        \"item_id\": 2, \r\n        \"quantity\": 10, \r\n        \"discount\": 5000\r\n    }\r\n  ],\r\n  \"discount\": 0,\r\n  \"tax\": 10000,\r\n  \"payment_method\": \"cash\",\r\n  \"notes\": \"Pembelian offline\"\r\n}\r\n"
+								},
+								"url": {
+									"raw": "{{INVENTORY_API_URL}}/sale",
+									"host": [
+										"{{INVENTORY_API_URL}}"
+									],
+									"path": [
+										"sale"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "",
+									"type": "text"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 04 Jan 2026 18:40:57 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "474"
+								}
+							],
+							"cookie": [
+								{
+									"expires": "Invalid Date",
+									"domain": "",
+									"path": ""
+								}
+							],
+							"body": "{\n    \"status\": true,\n    \"message\": \"Sale created succesfully\",\n    \"data\": {\n        \"id\": 7,\n        \"invoice_number\": \"INV-002\",\n        \"customer_name\": \"Siti\",\n        \"customer_phone\": \"081234567890\",\n        \"customer_email\": \"siti@mail.com\",\n        \"sale_date\": \"2026-01-05T01:40:57.489985Z\",\n        \"total_amount\": 140000,\n        \"discount\": 0,\n        \"tax\": 10000,\n        \"grand_total\": 150000,\n        \"payment_method\": \"cash\",\n        \"payment_status\": \"pending\",\n        \"notes\": \"Pembelian offline\",\n        \"created_by\": 1,\n        \"created_at\": \"2026-01-05T01:40:57.489985Z\",\n        \"updated_at\": \"2026-01-05T01:40:57.489985Z\"\n    }\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "TEST REST",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:3000",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000"
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"requests": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"requests": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "INVENTORY_API_URL",
+			"value": ""
+		}
+	]
+}
