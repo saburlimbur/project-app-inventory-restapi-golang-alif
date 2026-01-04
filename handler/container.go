@@ -16,6 +16,7 @@ type Container struct {
 	Warehouse *WarehouseHandler
 	Racks     *RacksHandler
 	Items     *ItemsHandler
+	Sale      *SaleHandler
 
 	Repositories *repository.Container
 }
@@ -36,6 +37,7 @@ func NewContainer(
 		Warehouse: NewWarehouseHandler(svc.Warehouse, validate, log, conf),
 		Racks:     NewRacksHandler(svc.Racks, validate, log, conf),
 		Items:     NewItemsHandler(svc.Items, validate, log, conf),
+		Sale:      NewSaleHandler(svc.Sale, validate, log, conf),
 
 		Repositories: repo,
 	}
