@@ -1,6 +1,11 @@
 package service
 
-import "alfdwirhmn/inventory/repository"
+import (
+	"alfdwirhmn/inventory/database"
+	"alfdwirhmn/inventory/repository"
+
+	"go.uber.org/zap"
+)
 
 type Container struct {
 	User      UserService
@@ -9,9 +14,10 @@ type Container struct {
 	Warehouse WarehouseService
 	Racks     RacksService
 	Items     ItemsService
+	Sale      SaleService
 }
 
-func NewContainer(repo *repository.Container) *Container {
+func NewContainer(repo *repository.Container, log *zap.Logger, tx database.TxManager) *Container {
 	permSvc := NewPermissionService()
 
 	return &Container{
@@ -21,5 +27,12 @@ func NewContainer(repo *repository.Container) *Container {
 		Warehouse: NewWarehouseService(repo.WarehouseRepo, permSvc),
 		Racks:     NewRacksService(repo.RacksRepo, permSvc),
 		Items:     NewItemsService(repo.ItemsRepo, permSvc),
+		Sale: NewSaleService(
+			repo.SaleRepo,
+			repo.ItemsRepo,
+			permSvc,
+			tx,
+			log,
+		),
 	}
 }
