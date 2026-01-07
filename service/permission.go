@@ -25,6 +25,8 @@ type PermissionService interface {
 	// SALE
 	CanCreateSale(role string) bool
 	CanViewSale(role string) bool
+	CanUpdateSale(role string) bool
+	CanDeleteSale(role string) bool
 
 	// REPORT
 	CanAccessReports(role string) bool
@@ -140,6 +142,14 @@ func (s *permissionService) CanCreateSale(role string) bool {
 
 func (s *permissionService) CanViewSale(role string) bool {
 	return role == "super_admin" || role == "admin" || role == "staff"
+}
+
+func (s *permissionService) CanUpdateSale(role string) bool {
+	return role == "super_admin"
+}
+
+func (s *permissionService) CanDeleteSale(role string) bool {
+	return role == "super_admin"
 }
 
 // report, hanya admin dan super yang bisa akses report

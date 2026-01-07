@@ -10,6 +10,9 @@ import (
 type SaleRepository interface {
 	Create(ctx context.Context, sl *model.Sale) (*model.Sale, error)
 	Lists(ctx context.Context, page, limit int) ([]model.Sale, int, error)
+	FindDetailByID(ctx context.Context, id int) (*model.Sale, error)
+	Update(ctx context.Context, sale *model.Sale) error
+	Delete(ctx context.Context, id int) error
 
 	CreateItem(ctx context.Context, item *model.SaleItem) error
 	FindByID(ctx context.Context, id int) (*model.Sale, error)
@@ -189,4 +192,66 @@ func (r *saleRepository) FindByID(ctx context.Context, id int) (*model.Sale, err
 		return nil, err
 	}
 	return s, nil
+}
+
+func (r *saleRepository) FindDetailByID(ctx context.Context, id int) (*model.Sale, error) {
+	query := `
+	SELECT
+		id, invoice_number, customer_name, customer_phone, customer_email,
+		sale_date, total_amount, discount, tax, grand_total,
+		payment_method, payment_status, notes, created_by, created_at, updated_at
+	FROM sales
+	WHERE id = $1
+	`
+
+	sale := &model.Sale{}
+	err := r.DB.QueryRow(ctx, query, id).Scan(
+		&sale.ID,
+		&sale.InvoiceNumber,
+		&sale.CustomerName,
+		&sale.CustomerPhone,
+		&sale.CustomerEmail,
+		&sale.SaleDate,
+		&sale.TotalAmount,
+		&sale.Discount,
+		&sale.Tax,
+		&sale.GrandTotal,
+		&sale.PaymentMethod,
+		&sale.PaymentStatus,
+		&sale.Notes,
+		&sale.CreatedBy,
+		&sale.CreatedAt,
+		&sale.UpdatedAt,
+	)
+	if err != nil {
+		return nil, err
+	}
+
+	return sale, nil
+}
+
+func (r *saleRepository) Update(ctx context.Context, sale *model.Sale) error {
+	query := `
+	UPDATE sales
+	SET
+		customer_name = $1,
+		customer_phone = $2,
+		customer_email = $3,
+		notes = $4,
+		updated_at = NOW()
+	WHERE id = $5
+	`
+	_, err := r.DB.Exec(ctx, query,
+		sale.CustomerName,
+		sale.CustomerPhone,
+		sale.CustomerEmail,
+		sale.Notes,
+		sale.ID,
+	)
+	return err
+}
+
+func (r *saleRepository) Delete(ctx context.Context, id int) error {
+	_, err := r.DB.Exec(ctx, `DELETE FROM sales WHERE id = $1`, id)
+	return err
 }

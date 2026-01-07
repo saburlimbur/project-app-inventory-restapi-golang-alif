@@ -6,6 +6,7 @@ import (
 	"alfdwirhmn/inventory/model"
 	"alfdwirhmn/inventory/service"
 	"alfdwirhmn/inventory/utils"
+	"context"
 	"encoding/json"
 	"net/http"
 	"strconv"
@@ -103,6 +104,50 @@ func (h *ItemsHandler) Lists(w http.ResponseWriter, r *http.Request) {
 	}
 
 	utils.JSONWithPagination(w, http.StatusOK, "succesfully get items data", items, *pagination)
+}
+
+func (h *ItemsHandler) DetailById(w http.ResponseWriter, r *http.Request) {
+	user, ok := r.Context().Value(middleware.UserContextKey).(*model.User)
+	if !ok {
+		utils.JSONError(w, http.StatusUnauthorized, "unauthorized", nil)
+		return
+	}
+
+	id, err := strconv.Atoi(chi.URLParam(r, "id"))
+	if err != nil {
+		utils.JSONError(w, http.StatusInternalServerError, "invalid item id", nil)
+		return
+	}
+
+	res, err := h.ItemsService.FindByID(context.Background(), id, user)
+	if err != nil {
+		utils.JSONError(w, http.StatusInternalServerError, err.Error(), nil)
+		return
+	}
+
+	if res == nil {
+		utils.JSONError(w, http.StatusNotFound, "item not found", nil)
+		return
+	}
+
+	utils.JSONSuccess(w, http.StatusOK, "succesfully get item detail", dto.ItemResponseDTO{
+		CategoryID:   res.CategoryID,
+		RackID:       res.RackID,
+		SKU:          res.SKU,
+		Name:         res.Name,
+		Description:  res.Description,
+		Unit:         res.Unit,
+		Price:        res.Price,
+		Cost:         res.Cost,
+		Stock:        res.Stock,
+		MinimumStock: res.MinimumStock,
+		Weight:       res.Weight,
+		Dimensions:   res.Dimensions,
+		IsActive:     res.IsActive,
+		CreatedBy:    *res.CreatedBy,
+		CreatedAt:    res.CreatedAt,
+		UpdatedAt:    res.UpdatedAt,
+	})
 }
 
 func (h *ItemsHandler) Update(w http.ResponseWriter, r *http.Request) {

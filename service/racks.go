@@ -12,6 +12,7 @@ import (
 type RacksService interface {
 	Create(ctx context.Context, usr *model.User, req dto.CreateRackRequest) (*model.Racks, error)
 	FindAll(page, limit int) ([]model.Racks, *dto.Pagination, error)
+	FindById(id int, usr *model.User) (*model.Racks, error)
 	Update(ctx context.Context, usr *model.User, id int, req dto.UpdateRackRequest) (*model.Racks, error)
 	Delete(ctx context.Context, usr *model.User, id int) error
 }
@@ -63,6 +64,14 @@ func (s *racksService) FindAll(page, limit int) ([]model.Racks, *dto.Pagination,
 	}
 
 	return racks, pagination, nil
+}
+
+func (s *racksService) FindById(id int, usr *model.User) (*model.Racks, error) {
+	if !s.permSvc.CanReadMasterData(usr.Role) {
+		return nil, errors.New("forbidden: cannon access racks")
+	}
+
+	return s.repo.DetailById(id)
 }
 
 func (s *racksService) Update(ctx context.Context, usr *model.User, id int, req dto.UpdateRackRequest) (*model.Racks, error) {

@@ -4,6 +4,7 @@ import (
 	"alfdwirhmn/inventory/database"
 	"alfdwirhmn/inventory/model"
 	"context"
+	"database/sql"
 	"errors"
 
 	"go.uber.org/zap"
@@ -12,6 +13,7 @@ import (
 type WarehouseRepository interface {
 	Create(ctx context.Context, whs *model.Warehouse) (*model.Warehouse, error)
 	Lists(page, limit int) ([]model.Warehouse, int, error)
+	DetailById(id int) (*model.Warehouse, error)
 	Update(ctx context.Context, id int, payload *model.Warehouse) (*model.Warehouse, error)
 	Delete(ctx context.Context, id int) error
 }
@@ -125,6 +127,36 @@ func (r *warehouseRepository) Lists(page, limit int) ([]model.Warehouse, int, er
 	}
 
 	return warehouses, total, nil
+}
+
+func (r *warehouseRepository) DetailById(id int) (*model.Warehouse, error) {
+	query := `
+		SELECT id, code, name, address, city, province, postal_code, phone, is_active, created_by, created_at, updated_at
+		FROM warehouses WHERE id = $1
+	`
+
+	var wr model.Warehouse
+	err := r.DB.QueryRow(context.Background(),
+		query, id).Scan(
+		&wr.ID,
+		&wr.Code,
+		&wr.Name,
+		&wr.Address,
+		&wr.City,
+		&wr.Province,
+		&wr.PostalCode,
+		&wr.Phone,
+		&wr.IsActive,
+		&wr.CreatedBy,
+		&wr.CreatedAt,
+		&wr.UpdatedAt,
+	)
+
+	if err == sql.ErrNoRows {
+		return nil, nil
+	}
+
+	return &wr, err
 }
 
 func (r *warehouseRepository) Update(ctx context.Context, id int, payload *model.Warehouse) (*model.Warehouse, error) {

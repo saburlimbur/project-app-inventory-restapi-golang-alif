@@ -4,6 +4,7 @@ import (
 	"alfdwirhmn/inventory/database"
 	"alfdwirhmn/inventory/model"
 	"context"
+	"database/sql"
 	"errors"
 
 	"go.uber.org/zap"
@@ -12,6 +13,7 @@ import (
 type CategoryRepository interface {
 	Create(ctx context.Context, ctg *model.Category) (*model.Category, error)
 	Lists(page, limit int) ([]model.Category, int, error)
+	DetailById(id int) (*model.Category, error)
 	Update(ctx context.Context, id int, payload *model.Category) (*model.Category, error)
 	Delete(ctx context.Context, id int) error
 
@@ -110,6 +112,32 @@ func (r *categoryRepository) Lists(page, limit int) ([]model.Category, int, erro
 	}
 
 	return category, totalCtg, nil
+}
+
+func (r *categoryRepository) DetailById(id int) (*model.Category, error) {
+	query := `
+	SELECT id, code, name, description, is_active, created_by, created_at, updated_at
+	FROM categories WHERE id = $1
+	`
+
+	var ct model.Category
+	err := r.DB.QueryRow(context.Background(),
+		query, id).Scan(
+		&ct.ID,
+		&ct.Code,
+		&ct.Name,
+		&ct.Description,
+		&ct.IsActive,
+		&ct.CreatedBy,
+		&ct.CreatedAt,
+		&ct.UpdatedAt,
+	)
+
+	if err == sql.ErrNoRows {
+		return nil, nil
+	}
+
+	return &ct, err
 }
 
 func (r *categoryRepository) Update(ctx context.Context, id int, payload *model.Category) (*model.Category, error) {

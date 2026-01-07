@@ -10,6 +10,7 @@ import (
 	"net/http"
 	"strconv"
 
+	"github.com/go-chi/chi/v5"
 	"github.com/go-playground/validator/v10"
 	"go.uber.org/zap"
 )
@@ -104,4 +105,53 @@ func (h *SaleHandler) Lists(w http.ResponseWriter, r *http.Request) {
 	}
 
 	utils.JSONWithPagination(w, http.StatusOK, "succesfully get sale data", sale, *pagination)
+}
+
+func (h *SaleHandler) FindById(w http.ResponseWriter, r *http.Request) {
+	user := r.Context().Value(middleware.UserContextKey).(*model.User)
+
+	id, _ := strconv.Atoi(chi.URLParam(r, "id"))
+
+	sale, err := h.SaleService.Detail(r.Context(), user, id)
+	if err != nil {
+		utils.JSONError(w, http.StatusForbidden, err.Error(), nil)
+		return
+	}
+
+	utils.JSONSuccess(w, http.StatusOK, "success", sale)
+}
+
+func (h *SaleHandler) Update(w http.ResponseWriter, r *http.Request) {
+	user := r.Context().Value(middleware.UserContextKey).(*model.User)
+	id, _ := strconv.Atoi(chi.URLParam(r, "id"))
+
+	var req dto.UpdateSaleRequest
+	json.NewDecoder(r.Body).Decode(&req)
+
+	sale := &model.Sale{
+		ID:            id,
+		CustomerName:  req.CustomerName,
+		CustomerPhone: req.CustomerPhone,
+		CustomerEmail: req.CustomerEmail,
+		Notes:         req.Notes,
+	}
+
+	if err := h.SaleService.Update(r.Context(), user, sale); err != nil {
+		utils.JSONError(w, http.StatusForbidden, err.Error(), nil)
+		return
+	}
+
+	utils.JSONSuccess(w, http.StatusOK, "sale updated", nil)
+}
+
+func (h *SaleHandler) Delete(w http.ResponseWriter, r *http.Request) {
+	user := r.Context().Value(middleware.UserContextKey).(*model.User)
+	id, _ := strconv.Atoi(chi.URLParam(r, "id"))
+
+	if err := h.SaleService.Delete(r.Context(), user, id); err != nil {
+		utils.JSONError(w, http.StatusForbidden, err.Error(), nil)
+		return
+	}
+
+	utils.JSONSuccess(w, http.StatusOK, "sale deleted", nil)
 }

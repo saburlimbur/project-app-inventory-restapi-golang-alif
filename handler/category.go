@@ -98,6 +98,42 @@ func (h *CategoryHandler) Lists(w http.ResponseWriter, r *http.Request) {
 	utils.JSONWithPagination(w, http.StatusOK, "succesfully get category data", category, *pagination)
 }
 
+func (h *CategoryHandler) DetailById(w http.ResponseWriter, r *http.Request) {
+	user, ok := r.Context().Value(middleware.UserContextKey).(*model.User)
+	if !ok {
+		utils.JSONError(w, http.StatusUnauthorized, "unauthorized", nil)
+		return
+	}
+
+	id, err := strconv.Atoi(chi.URLParam(r, "id"))
+	if err != nil {
+		utils.JSONError(w, http.StatusBadRequest, "invalid category id", nil)
+		return
+	}
+
+	res, err := h.CategoryService.FindById(id, user)
+	if err != nil {
+		utils.JSONError(w, http.StatusInternalServerError, err.Error(), nil)
+		return
+	}
+
+	if res == nil {
+		utils.JSONError(w, http.StatusNotFound, "category not found", nil)
+		return
+	}
+
+	utils.JSONSuccess(w, http.StatusOK, "successfully get category detail", dto.CategoryResponseDTO{
+		ID:          res.ID,
+		Code:        res.Code,
+		Name:        res.Name,
+		Description: res.Description,
+		IsActive:    res.IsActive,
+		CreatedBy:   *res.CreatedBy,
+		CreatedAt:   res.CreatedAt,
+		UpdatedAt:   res.UpdatedAt,
+	})
+}
+
 func (h *CategoryHandler) Update(w http.ResponseWriter, r *http.Request) {
 	// user dari context
 	user, ok := r.Context().Value(middleware.UserContextKey).(*model.User)

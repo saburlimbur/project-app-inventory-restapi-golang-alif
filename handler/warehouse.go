@@ -108,6 +108,47 @@ func (h *WarehouseHandler) Lists(w http.ResponseWriter, r *http.Request) {
 	)
 }
 
+func (h *WarehouseHandler) DetailById(w http.ResponseWriter, r *http.Request) {
+	user, ok := r.Context().Value(middleware.UserContextKey).(*model.User)
+	if !ok {
+		utils.JSONError(w, http.StatusUnauthorized, "unauthorized", nil)
+		return
+	}
+
+	id, err := strconv.Atoi(chi.URLParam(r, "id"))
+	if err != nil {
+		utils.JSONError(w, http.StatusBadRequest, "invalid warehouse id", nil)
+		return
+	}
+
+	res, err := h.WarehouseService.FindByID(id, user)
+	if err != nil {
+		utils.JSONError(w, http.StatusInternalServerError, err.Error(), nil)
+		return
+	}
+
+	if res == nil {
+		utils.JSONError(w, http.StatusNotFound, "warehouse not found", nil)
+		return
+	}
+
+	utils.JSONSuccess(w, http.StatusOK, "successfully get warehouse detail", dto.WarehouseResponseDTO{
+		ID:         res.ID,
+		Code:       res.Code,
+		Name:       res.Name,
+		Address:    res.Address,
+		City:       res.City,
+		Province:   res.Province,
+		PostalCode: res.PostalCode,
+		Phone:      res.Phone,
+		IsActive:   res.IsActive,
+		CreatedBy:  *res.CreatedBy,
+		CreatedAt:  res.CreatedAt,
+		UpdatedAt:  res.UpdatedAt,
+	})
+
+}
+
 func (h *WarehouseHandler) Update(w http.ResponseWriter, r *http.Request) {
 	// user dari context
 	user, ok := r.Context().Value(middleware.UserContextKey).(*model.User)

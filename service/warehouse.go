@@ -12,6 +12,7 @@ import (
 type WarehouseService interface {
 	Create(ctx context.Context, usr *model.User, req dto.CreateWarehouseRequest) (*model.Warehouse, error)
 	FindAll(page, limit int) (*[]model.Warehouse, *dto.Pagination, error)
+	FindByID(id int, usr *model.User) (*model.Warehouse, error)
 	Update(ctx context.Context, usr *model.User, id int, req dto.UpdateWarehouseRequest) (*model.Warehouse, error)
 	Delete(ctx context.Context, usr *model.User, id int) error
 }
@@ -66,11 +67,19 @@ func (w *warehouseService) FindAll(page, limit int) (*[]model.Warehouse, *dto.Pa
 	return &warehouses, &pagination, nil
 }
 
-func (c *warehouseService) Update(ctx context.Context, usr *model.User, id int, req dto.UpdateWarehouseRequest) (*model.Warehouse, error) {
+func (w *warehouseService) FindByID(id int, usr *model.User) (*model.Warehouse, error) {
+	if !w.permSvc.CanReadMasterData(usr.Role) {
+		return nil, errors.New("forbidden: cannot access warehouse")
+	}
+
+	return w.repo.DetailById(id)
+}
+
+func (w *warehouseService) Update(ctx context.Context, usr *model.User, id int, req dto.UpdateWarehouseRequest) (*model.Warehouse, error) {
 
 	// permission
-	if !c.permSvc.CanUpdateMasterData(usr.Role) {
-		return nil, errors.New("forbidden: cannot update category")
+	if !w.permSvc.CanUpdateMasterData(usr.Role) {
+		return nil, errors.New("forbidden: cannot update warehouse")
 	}
 
 	payload := &model.Warehouse{
@@ -84,13 +93,13 @@ func (c *warehouseService) Update(ctx context.Context, usr *model.User, id int, 
 		IsActive:   req.IsActive,
 	}
 
-	return c.repo.Update(ctx, id, payload)
+	return w.repo.Update(ctx, id, payload)
 }
 
-func (c *warehouseService) Delete(ctx context.Context, usr *model.User, id int) error {
-	if !c.permSvc.CanDeleteMasterData(usr.Role) {
-		return errors.New("forbidden: cannot delete category")
+func (w *warehouseService) Delete(ctx context.Context, usr *model.User, id int) error {
+	if !w.permSvc.CanDeleteMasterData(usr.Role) {
+		return errors.New("forbidden: cannot delete warehouse")
 	}
 
-	return c.repo.Delete(ctx, id)
+	return w.repo.Delete(ctx, id)
 }

@@ -4,6 +4,7 @@ import (
 	"alfdwirhmn/inventory/database"
 	"alfdwirhmn/inventory/model"
 	"context"
+	"database/sql"
 	"errors"
 
 	"go.uber.org/zap"
@@ -12,6 +13,7 @@ import (
 type RacksRepository interface {
 	Create(ctx context.Context, rk *model.Racks) (*model.Racks, error)
 	Lists(page, limit int) ([]model.Racks, int, error)
+	DetailById(id int) (*model.Racks, error)
 	Update(ctx context.Context, id int, payload *model.Racks) (*model.Racks, error)
 	Delete(ctx context.Context, id int) error
 }
@@ -119,6 +121,37 @@ func (r *racksRepository) Lists(page, limit int) ([]model.Racks, int, error) {
 	}
 
 	return racks, total, nil
+}
+
+func (r *racksRepository) DetailById(id int) (*model.Racks, error) {
+	query := `
+		SELECT id, warehouse_id, code, name, location, capacity, description, is_active, created_by, created_at, updated_at
+		FROM racks
+		WHERE id = $1
+	`
+
+	var rack model.Racks
+
+	err := r.DB.QueryRow(context.Background(),
+		query, id).Scan(
+		&rack.ID,
+		&rack.WarehouseID,
+		&rack.Code,
+		&rack.Name,
+		&rack.Location,
+		&rack.Capacity,
+		&rack.Description,
+		&rack.IsActive,
+		&rack.CreatedBy,
+		&rack.CreatedAt,
+		&rack.UpdatedAt,
+	)
+
+	if err == sql.ErrNoRows {
+		return nil, nil
+	}
+
+	return &rack, err
 }
 
 func (r *racksRepository) Update(ctx context.Context, id int, payload *model.Racks) (*model.Racks, error) {

@@ -14,6 +14,7 @@ type ItemsService interface {
 	FindAll(page, limit int) (*[]model.Item, *dto.Pagination, error)
 	Update(ctx context.Context, usr *model.User, id int, req dto.UpdateItemRequest) (*model.Item, error)
 	Delete(ctx context.Context, usr *model.User, id int) error
+	FindByID(ctx context.Context, id int, usr *model.User) (*model.Item, error)
 }
 
 type itemsService struct {
@@ -79,6 +80,15 @@ func (s *itemsService) Update(ctx context.Context, user *model.User, id int, req
 	}
 
 	return s.repo.Update(ctx, id, req)
+}
+
+func (s *itemsService) FindByID(ctx context.Context, id int, usr *model.User) (*model.Item, error) {
+
+	if !s.permSvc.CanReadMasterData(usr.Role) {
+		return nil, errors.New("forbidden: cannot access items")
+	}
+
+	return s.repo.FindByID(ctx, id)
 }
 
 func (s *itemsService) Delete(ctx context.Context, usr *model.User, id int) error {

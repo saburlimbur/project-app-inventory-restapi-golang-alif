@@ -12,6 +12,7 @@ import (
 type CategoryService interface {
 	Create(ctx context.Context, usr *model.User, req dto.CreateCategoryRequest) (*model.Category, error)
 	FindAll(page, limit int) (*[]model.Category, *dto.Pagination, error)
+	FindById(id int, usr *model.User) (*model.Category, error)
 	Update(ctx context.Context, usr *model.User, id int, req dto.UpdateCategoryRequest) (*model.Category, error)
 	Delete(ctx context.Context, usr *model.User, id int) error
 }
@@ -81,6 +82,14 @@ func (c *categoryService) FindAll(page, limit int) (*[]model.Category, *dto.Pagi
 	}
 
 	return &category, &pagination, nil
+}
+
+func (c *categoryService) FindById(id int, usr *model.User) (*model.Category, error) {
+	if !c.permSvc.CanReadMasterData(usr.Role) {
+		return nil, errors.New("forbidden: cannot access category")
+	}
+
+	return c.repo.DetailById(id)
 }
 
 func (c *categoryService) Update(ctx context.Context, usr *model.User, id int, req dto.UpdateCategoryRequest) (*model.Category, error) {

@@ -266,14 +266,29 @@ func (r *itemsRepository) Delete(ctx context.Context, id int) error {
 }
 
 func (r *itemsRepository) FindByID(ctx context.Context, id int) (*model.Item, error) {
-	q := `SELECT id, name, price, stock FROM items WHERE id=$1`
+	query := `SELECT id, category_id, rack_id, sku, name, description, price, unit, cost, stock, minimum_stock, weight, dimensions, is_active, created_by, created_at, updated_at
+			FROM items 
+			WHERE id = $1`
 
 	item := &model.Item{}
-	err := r.DB.QueryRow(ctx, q, id).Scan(
+	err := r.DB.QueryRow(ctx, query, id).Scan(
 		&item.ID,
+		&item.CategoryID,
+		&item.RackID,
+		&item.SKU,
 		&item.Name,
+		&item.Description,
 		&item.Price,
+		&item.Unit,
+		&item.Cost,
 		&item.Stock,
+		&item.MinimumStock,
+		&item.Weight,
+		&item.Dimensions,
+		&item.IsActive,
+		&item.CreatedBy,
+		&item.CreatedAt,
+		&item.UpdatedAt,
 	)
 	if err != nil {
 		return nil, err

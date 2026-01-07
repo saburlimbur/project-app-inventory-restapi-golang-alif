@@ -15,6 +15,9 @@ import (
 type SaleService interface {
 	Create(ctx context.Context, usr *model.User, req dto.CreateSaleRequest) (*model.Sale, error)
 	FindAll(ctx context.Context, page, limit int) (*[]model.Sale, *dto.Pagination, error)
+	Detail(ctx context.Context, usr *model.User, id int) (*model.Sale, error)
+	Update(ctx context.Context, usr *model.User, sale *model.Sale) error
+	Delete(ctx context.Context, usr *model.User, id int) error
 }
 
 type saleService struct {
@@ -138,4 +141,25 @@ func (s *saleService) FindAll(ctx context.Context, page, limit int) (*[]model.Sa
 	}
 
 	return &sale, &pagination, nil
+}
+
+func (s *saleService) Detail(ctx context.Context, usr *model.User, id int) (*model.Sale, error) {
+	if !s.permSvc.CanViewSale(usr.Role) {
+		return nil, errors.New("forbidden")
+	}
+	return s.repo.FindDetailByID(ctx, id)
+}
+
+func (s *saleService) Update(ctx context.Context, usr *model.User, sale *model.Sale) error {
+	if !s.permSvc.CanUpdateSale(usr.Role) {
+		return errors.New("forbidden")
+	}
+	return s.repo.Update(ctx, sale)
+}
+
+func (s *saleService) Delete(ctx context.Context, usr *model.User, id int) error {
+	if !s.permSvc.CanDeleteSale(usr.Role) {
+		return errors.New("forbidden")
+	}
+	return s.repo.Delete(ctx, id)
 }

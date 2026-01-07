@@ -56,6 +56,7 @@ func NewRouter(h *handler.Container, log *zap.Logger) *chi.Mux {
 			r.With(role.AllowRead()).Get("/", h.Warehouse.Lists)
 
 			r.Route("/{id}", func(r chi.Router) {
+				r.With(role.AllowRead()).Get("/", h.Warehouse.DetailById)
 				r.With(role.AllowAdmin()).Put("/", h.Warehouse.Update)
 				r.With(role.AllowAdmin()).Delete("/", h.Warehouse.Delete)
 			})
@@ -66,6 +67,7 @@ func NewRouter(h *handler.Container, log *zap.Logger) *chi.Mux {
 			r.With(role.AllowRead()).Get("/", h.Racks.Lists)
 
 			r.Route("/{id}", func(r chi.Router) {
+				r.With(role.AllowRead()).Get("/", h.Racks.DetailById)
 				r.With(role.AllowAdmin()).Put("/", h.Racks.Update)
 				r.With(role.AllowAdmin()).Delete("/", h.Racks.Delete)
 			})
@@ -76,6 +78,7 @@ func NewRouter(h *handler.Container, log *zap.Logger) *chi.Mux {
 			r.With(role.AllowRead()).Get("/", h.Items.Lists)
 
 			r.Route("/{id}", func(r chi.Router) {
+				r.With(role.AllowRead()).Get("/", h.Items.DetailById)
 				r.With(role.AllowAllRole()).Put("/", h.Items.Update)
 				r.With(role.AllowAdmin()).Delete("/", h.Items.Delete)
 			})
@@ -88,6 +91,7 @@ func NewRouter(h *handler.Container, log *zap.Logger) *chi.Mux {
 			r.With(role.AllowAdmin()).Post("/", h.Category.Create)
 
 			r.Route("/{id}", func(r chi.Router) {
+				r.With(role.AllowRead()).Get("/", h.Category.DetailById)
 				r.With(role.AllowAdmin()).Put("/", h.Category.Update)
 				r.With(role.AllowAdmin()).Delete("/", h.Category.Delete)
 			})
@@ -96,6 +100,12 @@ func NewRouter(h *handler.Container, log *zap.Logger) *chi.Mux {
 		r.Route("/sale", func(r chi.Router) {
 			r.With(role.AllowRead()).Get("/", h.Sale.Lists)
 			r.With(role.AllowAdmin()).Post("/", h.Sale.Create)
+
+			r.Route("/{id}", func(r chi.Router) {
+				r.With(role.AllowRead()).Get("/", h.Sale.FindById)
+				r.With(role.AllowSuperAdmin()).Put("/", h.Sale.Update)
+				r.With(role.AllowSuperAdmin()).Delete("/", h.Sale.Delete)
+			})
 		})
 	})
 

@@ -101,6 +101,45 @@ func (h *RacksHandler) Lists(w http.ResponseWriter, r *http.Request) {
 	utils.JSONWithPagination(w, http.StatusOK, "successfully get rack data", racks, *pagination)
 }
 
+func (h *RacksHandler) DetailById(w http.ResponseWriter, r *http.Request) {
+	user, ok := r.Context().Value(middleware.UserContextKey).(*model.User)
+	if !ok {
+		utils.JSONError(w, http.StatusUnauthorized, "unauthorized", nil)
+		return
+	}
+
+	id, err := strconv.Atoi(chi.URLParam(r, "id"))
+	if err != nil {
+		utils.JSONError(w, http.StatusBadRequest, "invalid racks id", nil)
+		return
+	}
+
+	res, err := h.RacksService.FindById(id, user)
+	if err != nil {
+		utils.JSONError(w, http.StatusInternalServerError, err.Error(), nil)
+		return
+	}
+
+	if res == nil {
+		utils.JSONError(w, http.StatusNotFound, "racks not found", nil)
+		return
+	}
+
+	utils.JSONSuccess(w, http.StatusOK, "succesfully get racks detail", dto.RackResponseDTO{
+		ID:          res.ID,
+		WarehouseID: res.WarehouseID,
+		Code:        res.Code,
+		Name:        res.Name,
+		Location:    res.Location,
+		Capacity:    res.Capacity,
+		Description: res.Description,
+		IsActive:    res.IsActive,
+		CreatedBy:   *res.CreatedBy,
+		CreatedAt:   res.CreatedAt,
+		UpdatedAt:   res.UpdatedAt,
+	})
+}
+
 func (h *RacksHandler) Update(w http.ResponseWriter, r *http.Request) {
 	user, ok := r.Context().Value(middleware.UserContextKey).(*model.User)
 	if !ok {
