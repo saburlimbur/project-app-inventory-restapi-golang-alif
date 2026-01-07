@@ -3,6 +3,7 @@ package repository
 import (
 	"alfdwirhmn/inventory/model"
 	"context"
+	"errors"
 
 	"go.uber.org/zap"
 )
@@ -13,6 +14,9 @@ type SaleRepository interface {
 	FindDetailByID(ctx context.Context, id int) (*model.Sale, error)
 	Update(ctx context.Context, sale *model.Sale) error
 	Delete(ctx context.Context, id int) error
+
+	// transaction status update
+	UpdatePaymentStatus(ctx context.Context, id int, status string) error
 
 	CreateItem(ctx context.Context, item *model.SaleItem) error
 	FindByID(ctx context.Context, id int) (*model.Sale, error)
@@ -249,6 +253,27 @@ func (r *saleRepository) Update(ctx context.Context, sale *model.Sale) error {
 		sale.ID,
 	)
 	return err
+}
+
+func (r *saleRepository) UpdatePaymentStatus(ctx context.Context, id int, status string) error {
+
+	query := `
+	UPDATE sales
+	SET payment_status = $1,
+	    updated_at = NOW()
+	WHERE id = $2
+	`
+
+	res, err := r.DB.Exec(ctx, query, status, id)
+	if err != nil {
+		return err
+	}
+
+	if res.RowsAffected() == 0 {
+		return errors.New("sale not found")
+	}
+
+	return nil
 }
 
 func (r *saleRepository) Delete(ctx context.Context, id int) error {

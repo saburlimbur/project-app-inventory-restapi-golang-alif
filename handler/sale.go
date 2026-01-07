@@ -155,3 +155,55 @@ func (h *SaleHandler) Delete(w http.ResponseWriter, r *http.Request) {
 
 	utils.JSONSuccess(w, http.StatusOK, "sale deleted", nil)
 }
+
+func (h *SaleHandler) UpdateSalePaymentStatus(w http.ResponseWriter, r *http.Request) {
+	ctx := r.Context()
+
+	saleID, err := strconv.Atoi(chi.URLParam(r, "id"))
+	if err != nil {
+		utils.JSONError(w, http.StatusBadRequest, "invalid sale id", err)
+		return
+	}
+
+	var req dto.UpdateSalePaymentRequest
+	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
+		utils.JSONError(w, http.StatusBadRequest, "invalid request body", err)
+		return
+	}
+
+	if validationErrors, err := utils.ValidateErrors(req); err != nil {
+		utils.JSONError(w, http.StatusBadRequest, "validation failed", validationErrors)
+		return
+	}
+
+	user, ok := ctx.Value(middleware.UserContextKey).(*model.User)
+	if !ok {
+		utils.JSONError(w, http.StatusUnauthorized, "unauthorized", nil)
+		return
+	}
+
+	sale, err := h.SaleService.UpdatePaymentStatus(ctx, saleID, req, user)
+	if err != nil {
+		utils.JSONError(w, http.StatusBadRequest, err.Error(), nil)
+		return
+	}
+
+	utils.JSONSuccess(w, http.StatusOK, "payment status updated", dto.SaleResponseDTO{
+		ID:            sale.ID,
+		InvoiceNumber: sale.InvoiceNumber,
+		CustomerName:  sale.CustomerName,
+		CustomerPhone: sale.CustomerPhone,
+		CustomerEmail: sale.CustomerEmail,
+		SaleDate:      sale.SaleDate,
+		TotalAmount:   sale.TotalAmount,
+		Discount:      sale.Discount,
+		Tax:           sale.Tax,
+		GrandTotal:    sale.GrandTotal,
+		PaymentMethod: sale.PaymentMethod,
+		PaymentStatus: sale.PaymentStatus,
+		Notes:         sale.Notes,
+		CreatedBy:     *sale.CreatedBy,
+		CreatedAt:     sale.CreatedAt,
+		UpdatedAt:     sale.UpdatedAt,
+	})
+}

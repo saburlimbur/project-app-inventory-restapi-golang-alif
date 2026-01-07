@@ -103,8 +103,13 @@ func NewRouter(h *handler.Container, log *zap.Logger) *chi.Mux {
 
 			r.Route("/{id}", func(r chi.Router) {
 				r.With(role.AllowRead()).Get("/", h.Sale.FindById)
+				// update data sale (customer, notes, dll)
 				r.With(role.AllowSuperAdmin()).Put("/", h.Sale.Update)
+
 				r.With(role.AllowSuperAdmin()).Delete("/", h.Sale.Delete)
+
+				// update transaction
+				r.With(role.AllowAdmin()).Patch("/payment-status", h.Sale.UpdateSalePaymentStatus)
 			})
 		})
 	})

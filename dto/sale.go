@@ -48,12 +48,16 @@ type UpdateSaleRequest struct {
 	CustomerPhone *string `json:"customer_phone"`
 	CustomerEmail *string `json:"customer_email"`
 
-	TotalAmount *float64 `json:"total_amount" validate:"omitempty,gte=0"`
-	Discount    *float64 `json:"discount" validate:"omitempty,gte=0"`
-	Tax         *float64 `json:"tax" validate:"omitempty,gte=0"`
-	GrandTotal  *float64 `json:"grand_total" validate:"omitempty,gte=0"`
+	// TotalAmount *float64 `json:"total_amount" validate:"omitempty,gte=0"`
+	// Discount    *float64 `json:"discount" validate:"omitempty,gte=0"`
+	// Tax         *float64 `json:"tax" validate:"omitempty,gte=0"`
+	// GrandTotal  *float64 `json:"grand_total" validate:"omitempty,gte=0"`
 
 	PaymentMethod *string `json:"payment_method"`
 	PaymentStatus *string `json:"payment_status" validate:"omitempty,oneof=pending paid cancelled"`
 	Notes         *string `json:"notes"`
+}
+
+type UpdateSalePaymentRequest struct {
+	PaymentStatus string `json:"payment_status" validate:"required,oneof=pending paid cancelled"`
 }

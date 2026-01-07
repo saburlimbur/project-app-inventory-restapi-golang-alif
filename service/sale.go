@@ -18,6 +18,14 @@ type SaleService interface {
 	Detail(ctx context.Context, usr *model.User, id int) (*model.Sale, error)
 	Update(ctx context.Context, usr *model.User, sale *model.Sale) error
 	Delete(ctx context.Context, usr *model.User, id int) error
+
+	// transaction
+	UpdatePaymentStatus(
+		ctx context.Context,
+		saleID int,
+		req dto.UpdateSalePaymentRequest,
+		user *model.User,
+	) (*model.Sale, error)
 }
 
 type saleService struct {
@@ -162,4 +170,39 @@ func (s *saleService) Delete(ctx context.Context, usr *model.User, id int) error
 		return errors.New("forbidden")
 	}
 	return s.repo.Delete(ctx, id)
+}
+
+func (s *saleService) UpdatePaymentStatus(ctx context.Context, saleID int, req dto.UpdateSalePaymentRequest, user *model.User) (*model.Sale, error) {
+
+	if user.Role != "super_admin" && user.Role != "admin" {
+		return nil, errors.New("unauthorized")
+	}
+
+	// get data id from db
+	sale, err := s.repo.FindDetailByID(ctx, saleID)
+	if err != nil {
+		return nil, err
+	}
+
+	// if paid, not update pay status (double pay)
+	if sale.PaymentStatus == "paid" {
+		return nil, errors.New("sale already paid")
+	}
+
+	if sale.PaymentStatus == "cancelled" && req.PaymentStatus == "paid" {
+		return nil, errors.New("cancelled sale cannot be paid")
+	}
+
+	// update to db
+	if err := s.repo.UpdatePaymentStatus(ctx, saleID, req.PaymentStatus); err != nil {
+		return nil, err
+	}
+
+	// get sales data after update
+	updatedSale, err := s.repo.FindDetailByID(ctx, saleID)
+	if err != nil {
+		return nil, err
+	}
+
+	return updatedSale, nil
 }
