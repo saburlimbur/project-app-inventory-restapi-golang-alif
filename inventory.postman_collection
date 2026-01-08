@@ -302,7 +302,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "43521023-6a85-4c76-9ae2-dfcd10775e7d",
+									"value": "5907ba49-be81-414b-bf23-2d7ce0f0f308",
 									"type": "string"
 								}
 							]
@@ -382,7 +382,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "0938dcbe-bbeb-4512-beee-430ba38abd74",
+									"value": "5907ba49-be81-414b-bf23-2d7ce0f0f308",
 									"type": "string"
 								}
 							]
@@ -397,7 +397,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"username\": \"userfromsuperadmin\",\r\n  \"email\": \"userfromsuperadmin@company.com\",\r\n  \"password\": \"secret123\",\r\n  \"full_name\": \"User From Super Admin\",\r\n  \"role\": \"staff\"\r\n}\r\n"
+							"raw": "{\r\n  \"username\": \"johndelete\",\r\n  \"email\": \"johndelete@company.com\",\r\n  \"password\": \"secret123\",\r\n  \"full_name\": \"Staff untuk testing delete\",\r\n  \"role\": \"staff\"\r\n}\r\n"
 						},
 						"url": {
 							"raw": "{{INVENTORY_API_URL}}/users",
@@ -474,6 +474,253 @@
 							],
 							"cookie": [],
 							"body": "{\n    \"status\": false,\n    \"message\": \"email already exists\"\n}"
+						}
+					]
+				},
+				{
+					"name": "DETAIL BY ID",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "5907ba49-be81-414b-bf23-2d7ce0f0f308",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{INVENTORY_API_URL}}/users/2",
+							"host": [
+								"{{INVENTORY_API_URL}}"
+							],
+							"path": [
+								"users",
+								"2"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "RESPONSE DETAIL BY ID",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{INVENTORY_API_URL}}/users/2",
+									"host": [
+										"{{INVENTORY_API_URL}}"
+									],
+									"path": [
+										"users",
+										"2"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 08 Jan 2026 04:53:38 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "235"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": true,\n    \"message\": \"success\",\n    \"data\": {\n        \"id\": 2,\n        \"username\": \"johnstaff\",\n        \"email\": \"john.staff@company.com\",\n        \"full_name\": \"John Staff\",\n        \"role\": \"staff\",\n        \"is_active\": true,\n        \"created_at\": \"2025-12-30 17:09:58\",\n        \"updated_at\": \"2025-12-30 17:09:58\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "UPDATE USER",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "5907ba49-be81-414b-bf23-2d7ce0f0f308",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"username\": \"johnstaffupdated\",\r\n  \"email\": \"john.updated@mail.com\",\r\n  \"full_name\": \"John Doe Updated\",\r\n  \"role\": \"staff\",\r\n  \"is_active\": true\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{INVENTORY_API_URL}}/users/6",
+							"host": [
+								"{{INVENTORY_API_URL}}"
+							],
+							"path": [
+								"users",
+								"6"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "RESPONSE UPDATE USER",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"username\": \"johnstaffupdated\",\r\n  \"email\": \"john.updated@mail.com\",\r\n  \"full_name\": \"John Doe Updated\",\r\n  \"role\": \"staff\",\r\n  \"is_active\": true\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{INVENTORY_API_URL}}/users/6",
+									"host": [
+										"{{INVENTORY_API_URL}}"
+									],
+									"path": [
+										"users",
+										"6"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 08 Jan 2026 04:56:44 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "41"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": true,\n    \"message\": \"user updated\"\n}"
+						}
+					]
+				},
+				{
+					"name": "DELETE USER",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "5907ba49-be81-414b-bf23-2d7ce0f0f308",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{INVENTORY_API_URL}}/users/7",
+							"host": [
+								"{{INVENTORY_API_URL}}"
+							],
+							"path": [
+								"users",
+								"7"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "DELETE USER (SOFT DELETE)",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{INVENTORY_API_URL}}/users/7",
+									"host": [
+										"{{INVENTORY_API_URL}}"
+									],
+									"path": [
+										"users",
+										"7"
+									],
+									"query": [
+										{
+											"key": "",
+											"value": null,
+											"disabled": true
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 08 Jan 2026 04:59:08 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "45"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": true,\n    \"message\": \"user deactivated\"\n}"
 						}
 					]
 				}
@@ -576,7 +823,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "005f5a6b-0b4a-4b1e-8fa7-2dd4f75cb4af",
+									"value": "7b8c50db-a5ff-4644-b5c9-c0ca50a1a818",
 									"type": "string"
 								}
 							]
@@ -654,6 +901,91 @@
 							],
 							"cookie": [],
 							"body": "{\n    \"status\": true,\n    \"message\": \"succesfully get category data\",\n    \"data\": [\n        {\n            \"id\": 4,\n            \"code\": \"TS001\",\n            \"name\": \"Test categorys updated\",\n            \"description\": \"Kategori untuk testing method saja\",\n            \"is_active\": false,\n            \"created_by\": 5,\n            \"created_at\": \"2026-01-03T20:30:38.971875Z\",\n            \"updated_at\": \"2026-01-03T21:42:30.396664Z\"\n        },\n        {\n            \"id\": 3,\n            \"code\": \"FUR001\",\n            \"name\": \"Furniture\",\n            \"description\": \"Kategori untuk perabotan seperti meja, kursi, dan lemari\",\n            \"is_active\": true,\n            \"created_by\": 1,\n            \"created_at\": \"2026-01-02T17:43:13.088278Z\",\n            \"updated_at\": \"2026-01-02T17:43:13.088278Z\"\n        },\n        {\n            \"id\": 2,\n            \"code\": \"ATK001\",\n            \"name\": \"Alat Tulis Kantor\",\n            \"description\": \"Kategori untuk perlengkapan alat tulis dan kebutuhan perkantoran\",\n            \"is_active\": true,\n            \"created_by\": 1,\n            \"created_at\": \"2026-01-02T17:39:36.361915Z\",\n            \"updated_at\": \"2026-01-02T17:39:36.361915Z\"\n        }\n    ],\n    \"pagination\": {\n        \"page\": 1,\n        \"limit\": 3,\n        \"total_rows\": 4,\n        \"total_pages\": 2\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "GET DETAIL BY ID",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "7b8c50db-a5ff-4644-b5c9-c0ca50a1a818",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{INVENTORY_API_URL}}/categories/3",
+							"host": [
+								"{{INVENTORY_API_URL}}"
+							],
+							"path": [
+								"categories",
+								"3"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "RESPONSE GET DETAIL BY ID",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{INVENTORY_API_URL}}/categories/3",
+									"host": [
+										"{{INVENTORY_API_URL}}"
+									],
+									"path": [
+										"categories",
+										"3"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"description": "",
+									"type": "text"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 05 Jan 2026 10:04:00 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "303"
+								}
+							],
+							"cookie": [
+								{
+									"expires": "Invalid Date",
+									"domain": "",
+									"path": ""
+								}
+							],
+							"body": "{\n    \"status\": true,\n    \"message\": \"successfully get category detail\",\n    \"data\": {\n        \"id\": 3,\n        \"code\": \"FUR001\",\n        \"name\": \"Furniture\",\n        \"description\": \"Kategori untuk perabotan seperti meja, kursi, dan lemari\",\n        \"is_active\": true,\n        \"created_by\": 1,\n        \"created_at\": \"2026-01-02T17:43:13.088278Z\",\n        \"updated_at\": \"2026-01-02T17:43:13.088278Z\"\n    }\n}"
 						}
 					]
 				},
@@ -946,7 +1278,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "9c9bc59e-ac1c-4616-a433-51b85262905d",
+									"value": "7b8c50db-a5ff-4644-b5c9-c0ca50a1a818",
 									"type": "string"
 								}
 							]
@@ -1236,6 +1568,85 @@
 							"body": "{\n    \"status\": true,\n    \"message\": \"warehouses deleted successfully\",\n    \"data\": 3\n}"
 						}
 					]
+				},
+				{
+					"name": "GET DETAIL BY ID",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "7b8c50db-a5ff-4644-b5c9-c0ca50a1a818",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{INVENTORY_API_URL}}/warehouse/3",
+							"host": [
+								"{{INVENTORY_API_URL}}"
+							],
+							"path": [
+								"warehouse",
+								"3"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "RESPONSE GET DETAIL BY ID",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{INVENTORY_API_URL}}/warehouse/3",
+									"host": [
+										"{{INVENTORY_API_URL}}"
+									],
+									"path": [
+										"warehouse",
+										"3"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"description": "",
+									"type": "text"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 05 Jan 2026 06:35:06 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "357"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": true,\n    \"message\": \"successfully get warehouse detail\",\n    \"data\": {\n        \"id\": 3,\n        \"code\": \"DPR-001\",\n        \"name\": \"Gudang DPR\",\n        \"address\": \"Jl. Kencana No. 10\",\n        \"city\": \"Neraka\",\n        \"province\": \"Neraka paling bawah\",\n        \"postal_code\": \"13121\",\n        \"phone\": \"0217891111\",\n        \"is_active\": false,\n        \"created_by\": 1,\n        \"created_at\": \"2026-01-04T00:45:55.496112Z\",\n        \"updated_at\": \"2026-01-04T00:46:08.401677Z\"\n    }\n}"
+						}
+					]
 				}
 			]
 		},
@@ -1352,7 +1763,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "78a57d61-e9d8-4c9f-9dda-9ac1ea9b0986",
+									"value": "d50c5a59-ea4f-4804-9a8d-c2caa5b2d4d4",
 									"type": "string"
 								}
 							]
@@ -1642,6 +2053,108 @@
 							"body": "{\n    \"status\": true,\n    \"message\": \"rack deleted successfully\",\n    \"data\": 4\n}"
 						}
 					]
+				},
+				{
+					"name": "DETAIL BY ID",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "d50c5a59-ea4f-4804-9a8d-c2caa5b2d4d4",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"identifier\": \"johnstaff\", // username atau email\r\n  \"password\": \"secret123\"\r\n}\r\n\r\n// {\r\n//     \"identifier\": \"admin@inventory.com\",\r\n//     \"password\": \"secret321\"\r\n// }"
+						},
+						"url": {
+							"raw": "{{INVENTORY_API_URL}}/racks/2",
+							"host": [
+								"{{INVENTORY_API_URL}}"
+							],
+							"path": [
+								"racks",
+								"2"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "RESPONSE DETAIL BY ID",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"identifier\": \"johnstaff\", // username atau email\r\n  \"password\": \"secret123\"\r\n}\r\n\r\n// {\r\n//     \"identifier\": \"admin@inventory.com\",\r\n//     \"password\": \"secret321\"\r\n// }"
+								},
+								"url": {
+									"raw": "{{INVENTORY_API_URL}}/racks/2",
+									"host": [
+										"{{INVENTORY_API_URL}}"
+									],
+									"path": [
+										"racks",
+										"2"
+									],
+									"query": [
+										{
+											"key": "",
+											"value": null,
+											"disabled": true
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 07 Jan 2026 17:47:36 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "340"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": true,\n    \"message\": \"succesfully get racks detail\",\n    \"data\": {\n        \"id\": 2,\n        \"warehouse_id\": 1,\n        \"code\": \"RCK-002\",\n        \"name\": \"Rack B\",\n        \"location\": \"Lantai 1 - Zona B\",\n        \"capacity\": 150,\n        \"description\": \"Rak untuk menyimpan barang furniture\",\n        \"is_active\": true,\n        \"created_by\": 1,\n        \"created_at\": \"2026-01-04T01:23:47.789956Z\",\n        \"updated_at\": \"2026-01-04T01:23:47.789956Z\"\n    }\n}"
+						}
+					]
 				}
 			]
 		},
@@ -1755,7 +2268,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "005f5a6b-0b4a-4b1e-8fa7-2dd4f75cb4af",
+									"value": "d50c5a59-ea4f-4804-9a8d-c2caa5b2d4d4",
 									"type": "string"
 								}
 							]
@@ -2037,6 +2550,108 @@
 							"body": "{\n    \"status\": true,\n    \"message\": \"item deleted successfully\",\n    \"data\": 4\n}"
 						}
 					]
+				},
+				{
+					"name": "DETAIL BY ID",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "d50c5a59-ea4f-4804-9a8d-c2caa5b2d4d4",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"identifier\": \"johnstaff\", // username atau email\r\n  \"password\": \"secret123\"\r\n}\r\n\r\n// {\r\n//     \"identifier\": \"admin@inventory.com\",\r\n//     \"password\": \"secret321\"\r\n// }"
+						},
+						"url": {
+							"raw": "{{INVENTORY_API_URL}}/items/3",
+							"host": [
+								"{{INVENTORY_API_URL}}"
+							],
+							"path": [
+								"items",
+								"3"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "RESPONSE DETAIL BY ID",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"identifier\": \"johnstaff\", // username atau email\r\n  \"password\": \"secret123\"\r\n}\r\n\r\n// {\r\n//     \"identifier\": \"admin@inventory.com\",\r\n//     \"password\": \"secret321\"\r\n// }"
+								},
+								"url": {
+									"raw": "{{INVENTORY_API_URL}}/items/3",
+									"host": [
+										"{{INVENTORY_API_URL}}"
+									],
+									"path": [
+										"items",
+										"3"
+									],
+									"query": [
+										{
+											"key": "",
+											"value": null,
+											"disabled": true
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 07 Jan 2026 17:30:23 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "449"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": true,\n    \"message\": \"succesfully get item detail\",\n    \"data\": {\n        \"id\": 0,\n        \"category_id\": 2,\n        \"rack_id\": 3,\n        \"sku\": \"ATK-003-BUKU-A5\",\n        \"name\": \"Buku Tulis A5 40 Lembar Update\",\n        \"description\": \"Buku tulis ukuran A5, 40 lembar, kertas HVS\",\n        \"unit\": \"pcs\",\n        \"price\": 12000,\n        \"cost\": 8500,\n        \"stock\": 150,\n        \"minimum_stock\": 30,\n        \"weight\": 0.15,\n        \"dimensions\": \"21x15x1\",\n        \"is_active\": true,\n        \"created_by\": 1,\n        \"created_at\": \"2026-01-04T19:21:31.602527Z\",\n        \"updated_at\": \"2026-01-04T20:09:36.172746Z\"\n    }\n}"
+						}
+					]
 				}
 			]
 		},
@@ -2121,11 +2736,13 @@
 							},
 							"status": "OK",
 							"code": 200,
-							"_postman_previewlanguage": null,
+							"_postman_previewlanguage": "json",
 							"header": [
 								{
 									"key": "Content-Type",
-									"value": "application/json"
+									"value": "application/json",
+									"description": "",
+									"type": "text"
 								},
 								{
 									"key": "Date",
@@ -2149,7 +2766,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "594e399d-276b-444e-b404-9e1afe652c35",
+									"value": "247ce304-ac09-4ab7-81ef-a4b58893ac59",
 									"type": "string"
 								}
 							]
@@ -2164,7 +2781,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"invoice_number\": \"INV-002\",\r\n  \"customer_name\": \"Siti\",\r\n  \"customer_phone\": \"081234567890\",\r\n  \"customer_email\": \"siti@mail.com\",\r\n  \"items\": [\r\n    {\r\n        \"item_id\": 1, \r\n        \"quantity\": 20,\r\n        \"discount\": 0\r\n    },\r\n    {\r\n        \"item_id\": 2, \r\n        \"quantity\": 10, \r\n        \"discount\": 5000\r\n    }\r\n  ],\r\n  \"discount\": 0,\r\n  \"tax\": 10000,\r\n  \"payment_method\": \"cash\",\r\n  \"notes\": \"Pembelian offline\"\r\n}\r\n"
+							"raw": "{\r\n  \"invoice_number\": \"INV-003\",\r\n  \"customer_name\": \"Maesaroh\",\r\n  \"customer_phone\": \"089334567881\",\r\n  \"customer_email\": \"maesaroh@mail.com\",\r\n  \"items\": [\r\n    {\r\n        \"item_id\": 3, \r\n        \"quantity\": 20,\r\n        \"discount\": 0\r\n    },\r\n    {\r\n        \"item_id\": 1, \r\n        \"quantity\": 10, \r\n        \"discount\": 5000\r\n    }\r\n  ],\r\n  \"discount\": 0,\r\n  \"tax\": 10000,\r\n  \"payment_method\": \"transfer\",\r\n  \"notes\": \"Pembelian offline\"\r\n}\r\n"
 						},
 						"url": {
 							"raw": "{{INVENTORY_API_URL}}/sale",
@@ -2209,7 +2826,6 @@
 								{
 									"key": "Content-Type",
 									"value": "application/json",
-									"name": "Content-Type",
 									"description": "",
 									"type": "text"
 								},
@@ -2230,6 +2846,268 @@
 								}
 							],
 							"body": "{\n    \"status\": true,\n    \"message\": \"Sale created succesfully\",\n    \"data\": {\n        \"id\": 7,\n        \"invoice_number\": \"INV-002\",\n        \"customer_name\": \"Siti\",\n        \"customer_phone\": \"081234567890\",\n        \"customer_email\": \"siti@mail.com\",\n        \"sale_date\": \"2026-01-05T01:40:57.489985Z\",\n        \"total_amount\": 140000,\n        \"discount\": 0,\n        \"tax\": 10000,\n        \"grand_total\": 150000,\n        \"payment_method\": \"cash\",\n        \"payment_status\": \"pending\",\n        \"notes\": \"Pembelian offline\",\n        \"created_by\": 1,\n        \"created_at\": \"2026-01-05T01:40:57.489985Z\",\n        \"updated_at\": \"2026-01-05T01:40:57.489985Z\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "DETAIL BY ID",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "d50c5a59-ea4f-4804-9a8d-c2caa5b2d4d4",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{INVENTORY_API_URL}}/sale/8",
+							"host": [
+								"{{INVENTORY_API_URL}}"
+							],
+							"path": [
+								"sale",
+								"8"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "RESPONSE DETAIL BY ID",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{INVENTORY_API_URL}}/sale/8",
+									"host": [
+										"{{INVENTORY_API_URL}}"
+									],
+									"path": [
+										"sale",
+										"8"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 07 Jan 2026 18:38:48 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "471"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": true,\n    \"message\": \"success\",\n    \"data\": {\n        \"ID\": 8,\n        \"InvoiceNumber\": \"INV-003\",\n        \"CustomerName\": \"Maesaroh\",\n        \"CustomerPhone\": \"089999999999\",\n        \"CustomerEmail\": \"maesaroh_update@mail.com\",\n        \"SaleDate\": \"2026-01-08T00:59:51.560284Z\",\n        \"TotalAmount\": 285000,\n        \"Discount\": 0,\n        \"Tax\": 10000,\n        \"GrandTotal\": 295000,\n        \"PaymentMethod\": \"transfer\",\n        \"PaymentStatus\": \"paid\",\n        \"Notes\": \"Customer ganti metode bayar\",\n        \"CreatedBy\": 1,\n        \"CreatedAt\": \"2026-01-08T00:59:51.560284Z\",\n        \"UpdatedAt\": \"2026-01-08T01:32:21.462285Z\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "UPDATE SALE (DATA CUSTOMER)",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "247ce304-ac09-4ab7-81ef-a4b58893ac59",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"customer_name\": \"Maesaroh\",\r\n  \"customer_phone\": \"089999999999\",\r\n  \"customer_email\": \"maesaroh_update@mail.com\",\r\n  \"payment_method\": \"cash\",\r\n  \"notes\": \"Customer ganti metode bayar\"\r\n}\r\n"
+						},
+						"url": {
+							"raw": "{{INVENTORY_API_URL}}/sale/8",
+							"host": [
+								"{{INVENTORY_API_URL}}"
+							],
+							"path": [
+								"sale",
+								"8"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "RESPONSE UPDATE SALE",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"customer_name\": \"Maesaroh\",\r\n  \"customer_phone\": \"089999999999\",\r\n  \"customer_email\": \"maesaroh_update@mail.com\",\r\n  \"payment_method\": \"cash\",\r\n  \"notes\": \"Customer ganti metode bayar\"\r\n}\r\n"
+								},
+								"url": {
+									"raw": "{{INVENTORY_API_URL}}/sale/8",
+									"host": [
+										"{{INVENTORY_API_URL}}"
+									],
+									"path": [
+										"sale",
+										"8"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 07 Jan 2026 18:05:52 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "41"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": true,\n    \"message\": \"sale updated\"\n}"
+						}
+					]
+				},
+				{
+					"name": "UPDATE PAYMENT STATUS SALE",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "247ce304-ac09-4ab7-81ef-a4b58893ac59",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"payment_status\": \"paid\"\r\n}\r\n"
+						},
+						"url": {
+							"raw": "{{INVENTORY_API_URL}}/sale/8/payment-status",
+							"host": [
+								"{{INVENTORY_API_URL}}"
+							],
+							"path": [
+								"sale",
+								"8",
+								"payment-status"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "RESPONSE UPDATE PAYMENT STATUS SALE",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"payment_status\": \"paid\"\r\n}\r\n"
+								},
+								"url": {
+									"raw": "{{INVENTORY_API_URL}}/sale/8/payment-status",
+									"host": [
+										"{{INVENTORY_API_URL}}"
+									],
+									"path": [
+										"sale",
+										"8",
+										"payment-status"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"description": "",
+									"type": "text"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 07 Jan 2026 18:32:21 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "498"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": true,\n    \"message\": \"payment status updated\",\n    \"data\": {\n        \"id\": 8,\n        \"invoice_number\": \"INV-003\",\n        \"customer_name\": \"Maesaroh\",\n        \"customer_phone\": \"089999999999\",\n        \"customer_email\": \"maesaroh_update@mail.com\",\n        \"sale_date\": \"2026-01-08T00:59:51.560284Z\",\n        \"total_amount\": 285000,\n        \"discount\": 0,\n        \"tax\": 10000,\n        \"grand_total\": 295000,\n        \"payment_method\": \"transfer\",\n        \"payment_status\": \"paid\",\n        \"notes\": \"Customer ganti metode bayar\",\n        \"created_by\": 1,\n        \"created_at\": \"2026-01-08T00:59:51.560284Z\",\n        \"updated_at\": \"2026-01-08T01:32:21.462285Z\"\n    }\n}"
 						}
 					]
 				}

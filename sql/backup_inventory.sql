@@ -5,8 +5,6 @@
 -- Dumped from database version 17.4
 -- Dumped by pg_dump version 17.4
 
--- Started on 2026-01-05 01:59:20
-
 SET statement_timeout = 0;
 SET lock_timeout = 0;
 SET idle_in_transaction_session_timeout = 0;
@@ -20,7 +18,6 @@ SET client_min_messages = warning;
 SET row_security = off;
 
 --
--- TOC entry 235 (class 1255 OID 19520)
 -- Name: update_updated_at_column(); Type: FUNCTION; Schema: public; Owner: postgres
 --
 
@@ -41,7 +38,6 @@ SET default_tablespace = '';
 SET default_table_access_method = heap;
 
 --
--- TOC entry 222 (class 1259 OID 19350)
 -- Name: categories; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -60,8 +56,6 @@ CREATE TABLE public.categories (
 ALTER TABLE public.categories OWNER TO postgres;
 
 --
--- TOC entry 4984 (class 0 OID 0)
--- Dependencies: 222
 -- Name: TABLE categories; Type: COMMENT; Schema: public; Owner: postgres
 --
 
@@ -69,7 +63,6 @@ COMMENT ON TABLE public.categories IS 'Tabel untuk kategori barang';
 
 
 --
--- TOC entry 221 (class 1259 OID 19349)
 -- Name: categories_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
@@ -85,8 +78,6 @@ CREATE SEQUENCE public.categories_id_seq
 ALTER SEQUENCE public.categories_id_seq OWNER TO postgres;
 
 --
--- TOC entry 4985 (class 0 OID 0)
--- Dependencies: 221
 -- Name: categories_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
 
@@ -94,7 +85,6 @@ ALTER SEQUENCE public.categories_id_seq OWNED BY public.categories.id;
 
 
 --
--- TOC entry 228 (class 1259 OID 19420)
 -- Name: items; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -125,8 +115,6 @@ CREATE TABLE public.items (
 ALTER TABLE public.items OWNER TO postgres;
 
 --
--- TOC entry 4986 (class 0 OID 0)
--- Dependencies: 228
 -- Name: TABLE items; Type: COMMENT; Schema: public; Owner: postgres
 --
 
@@ -134,7 +122,6 @@ COMMENT ON TABLE public.items IS 'Tabel untuk barang/produk';
 
 
 --
--- TOC entry 227 (class 1259 OID 19419)
 -- Name: items_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
@@ -150,8 +137,6 @@ CREATE SEQUENCE public.items_id_seq
 ALTER SEQUENCE public.items_id_seq OWNER TO postgres;
 
 --
--- TOC entry 4987 (class 0 OID 0)
--- Dependencies: 227
 -- Name: items_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
 
@@ -159,7 +144,6 @@ ALTER SEQUENCE public.items_id_seq OWNED BY public.items.id;
 
 
 --
--- TOC entry 226 (class 1259 OID 19392)
 -- Name: racks; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -181,8 +165,6 @@ CREATE TABLE public.racks (
 ALTER TABLE public.racks OWNER TO postgres;
 
 --
--- TOC entry 4988 (class 0 OID 0)
--- Dependencies: 226
 -- Name: TABLE racks; Type: COMMENT; Schema: public; Owner: postgres
 --
 
@@ -190,7 +172,6 @@ COMMENT ON TABLE public.racks IS 'Tabel untuk rak penyimpanan di gudang';
 
 
 --
--- TOC entry 225 (class 1259 OID 19391)
 -- Name: racks_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
@@ -206,8 +187,6 @@ CREATE SEQUENCE public.racks_id_seq
 ALTER SEQUENCE public.racks_id_seq OWNER TO postgres;
 
 --
--- TOC entry 4989 (class 0 OID 0)
--- Dependencies: 225
 -- Name: racks_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
 
@@ -215,7 +194,6 @@ ALTER SEQUENCE public.racks_id_seq OWNED BY public.racks.id;
 
 
 --
--- TOC entry 232 (class 1259 OID 19496)
 -- Name: sale_items; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -238,8 +216,6 @@ CREATE TABLE public.sale_items (
 ALTER TABLE public.sale_items OWNER TO postgres;
 
 --
--- TOC entry 4990 (class 0 OID 0)
--- Dependencies: 232
 -- Name: TABLE sale_items; Type: COMMENT; Schema: public; Owner: postgres
 --
 
@@ -247,7 +223,6 @@ COMMENT ON TABLE public.sale_items IS 'Tabel untuk detail item penjualan';
 
 
 --
--- TOC entry 231 (class 1259 OID 19495)
 -- Name: sale_items_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
@@ -263,8 +238,6 @@ CREATE SEQUENCE public.sale_items_id_seq
 ALTER SEQUENCE public.sale_items_id_seq OWNER TO postgres;
 
 --
--- TOC entry 4991 (class 0 OID 0)
--- Dependencies: 231
 -- Name: sale_items_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
 
@@ -272,7 +245,6 @@ ALTER SEQUENCE public.sale_items_id_seq OWNED BY public.sale_items.id;
 
 
 --
--- TOC entry 230 (class 1259 OID 19463)
 -- Name: sales; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -304,8 +276,6 @@ CREATE TABLE public.sales (
 ALTER TABLE public.sales OWNER TO postgres;
 
 --
--- TOC entry 4992 (class 0 OID 0)
--- Dependencies: 230
 -- Name: TABLE sales; Type: COMMENT; Schema: public; Owner: postgres
 --
 
@@ -313,7 +283,6 @@ COMMENT ON TABLE public.sales IS 'Tabel untuk transaksi penjualan';
 
 
 --
--- TOC entry 229 (class 1259 OID 19462)
 -- Name: sales_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
@@ -329,8 +298,6 @@ CREATE SEQUENCE public.sales_id_seq
 ALTER SEQUENCE public.sales_id_seq OWNER TO postgres;
 
 --
--- TOC entry 4993 (class 0 OID 0)
--- Dependencies: 229
 -- Name: sales_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
 
@@ -338,7 +305,6 @@ ALTER SEQUENCE public.sales_id_seq OWNED BY public.sales.id;
 
 
 --
--- TOC entry 220 (class 1259 OID 19328)
 -- Name: sessions; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -358,8 +324,6 @@ CREATE TABLE public.sessions (
 ALTER TABLE public.sessions OWNER TO postgres;
 
 --
--- TOC entry 4994 (class 0 OID 0)
--- Dependencies: 220
 -- Name: TABLE sessions; Type: COMMENT; Schema: public; Owner: postgres
 --
 
@@ -367,7 +331,6 @@ COMMENT ON TABLE public.sessions IS 'Tabel untuk menyimpan session token penggun
 
 
 --
--- TOC entry 219 (class 1259 OID 19327)
 -- Name: sessions_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
@@ -383,8 +346,6 @@ CREATE SEQUENCE public.sessions_id_seq
 ALTER SEQUENCE public.sessions_id_seq OWNER TO postgres;
 
 --
--- TOC entry 4995 (class 0 OID 0)
--- Dependencies: 219
 -- Name: sessions_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
 
@@ -392,7 +353,6 @@ ALTER SEQUENCE public.sessions_id_seq OWNED BY public.sessions.id;
 
 
 --
--- TOC entry 218 (class 1259 OID 19308)
 -- Name: users; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -413,8 +373,6 @@ CREATE TABLE public.users (
 ALTER TABLE public.users OWNER TO postgres;
 
 --
--- TOC entry 4996 (class 0 OID 0)
--- Dependencies: 218
 -- Name: TABLE users; Type: COMMENT; Schema: public; Owner: postgres
 --
 
@@ -422,7 +380,6 @@ COMMENT ON TABLE public.users IS 'Tabel untuk menyimpan data pengguna sistem';
 
 
 --
--- TOC entry 217 (class 1259 OID 19307)
 -- Name: users_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
@@ -438,8 +395,6 @@ CREATE SEQUENCE public.users_id_seq
 ALTER SEQUENCE public.users_id_seq OWNER TO postgres;
 
 --
--- TOC entry 4997 (class 0 OID 0)
--- Dependencies: 217
 -- Name: users_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
 
@@ -447,7 +402,6 @@ ALTER SEQUENCE public.users_id_seq OWNED BY public.users.id;
 
 
 --
--- TOC entry 224 (class 1259 OID 19371)
 -- Name: warehouses; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -470,8 +424,6 @@ CREATE TABLE public.warehouses (
 ALTER TABLE public.warehouses OWNER TO postgres;
 
 --
--- TOC entry 4998 (class 0 OID 0)
--- Dependencies: 224
 -- Name: TABLE warehouses; Type: COMMENT; Schema: public; Owner: postgres
 --
 
@@ -479,7 +431,6 @@ COMMENT ON TABLE public.warehouses IS 'Tabel untuk gudang penyimpanan';
 
 
 --
--- TOC entry 233 (class 1259 OID 19527)
 -- Name: v_low_stock_items; Type: VIEW; Schema: public; Owner: postgres
 --
 
@@ -505,7 +456,6 @@ CREATE VIEW public.v_low_stock_items AS
 ALTER VIEW public.v_low_stock_items OWNER TO postgres;
 
 --
--- TOC entry 234 (class 1259 OID 19532)
 -- Name: v_sales_report; Type: VIEW; Schema: public; Owner: postgres
 --
 
@@ -527,7 +477,6 @@ CREATE VIEW public.v_sales_report AS
 ALTER VIEW public.v_sales_report OWNER TO postgres;
 
 --
--- TOC entry 223 (class 1259 OID 19370)
 -- Name: warehouses_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
@@ -543,8 +492,6 @@ CREATE SEQUENCE public.warehouses_id_seq
 ALTER SEQUENCE public.warehouses_id_seq OWNER TO postgres;
 
 --
--- TOC entry 4999 (class 0 OID 0)
--- Dependencies: 223
 -- Name: warehouses_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
 
@@ -552,7 +499,6 @@ ALTER SEQUENCE public.warehouses_id_seq OWNED BY public.warehouses.id;
 
 
 --
--- TOC entry 4693 (class 2604 OID 19353)
 -- Name: categories id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -560,7 +506,6 @@ ALTER TABLE ONLY public.categories ALTER COLUMN id SET DEFAULT nextval('public.c
 
 
 --
--- TOC entry 4706 (class 2604 OID 19423)
 -- Name: items id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -568,7 +513,6 @@ ALTER TABLE ONLY public.items ALTER COLUMN id SET DEFAULT nextval('public.items_
 
 
 --
--- TOC entry 4701 (class 2604 OID 19395)
 -- Name: racks id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -576,7 +520,6 @@ ALTER TABLE ONLY public.racks ALTER COLUMN id SET DEFAULT nextval('public.racks_
 
 
 --
--- TOC entry 4724 (class 2604 OID 19499)
 -- Name: sale_items id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -584,7 +527,6 @@ ALTER TABLE ONLY public.sale_items ALTER COLUMN id SET DEFAULT nextval('public.s
 
 
 --
--- TOC entry 4715 (class 2604 OID 19466)
 -- Name: sales id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -592,7 +534,6 @@ ALTER TABLE ONLY public.sales ALTER COLUMN id SET DEFAULT nextval('public.sales_
 
 
 --
--- TOC entry 4689 (class 2604 OID 19331)
 -- Name: sessions id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -600,7 +541,6 @@ ALTER TABLE ONLY public.sessions ALTER COLUMN id SET DEFAULT nextval('public.ses
 
 
 --
--- TOC entry 4685 (class 2604 OID 19311)
 -- Name: users id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -608,7 +548,6 @@ ALTER TABLE ONLY public.users ALTER COLUMN id SET DEFAULT nextval('public.users_
 
 
 --
--- TOC entry 4697 (class 2604 OID 19374)
 -- Name: warehouses id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -616,8 +555,6 @@ ALTER TABLE ONLY public.warehouses ALTER COLUMN id SET DEFAULT nextval('public.w
 
 
 --
--- TOC entry 4968 (class 0 OID 19350)
--- Dependencies: 222
 -- Data for Name: categories; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
@@ -630,22 +567,18 @@ COPY public.categories (id, code, name, description, is_active, created_by, crea
 
 
 --
--- TOC entry 4974 (class 0 OID 19420)
--- Dependencies: 228
 -- Data for Name: items; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 COPY public.items (id, category_id, rack_id, sku, name, description, unit, price, cost, stock, minimum_stock, weight, dimensions, is_active, created_by, created_at, updated_at) FROM stdin;
-3	2	3	ATK-003-BUKU-A5	Buku Tulis A5 40 Lembar Update	Buku tulis ukuran A5, 40 lembar, kertas HVS	pcs	12000.00	8500.00	150	30	0.15	21x15x1	t	1	2026-01-04 19:21:31.602527	2026-01-04 20:09:36.172746
 4	2	3	ASL-003-ASAL-A5	Asal Tulis	Buku asal tulis ukuran A5, 40 lembar, kertas HVS	pcs	22000.00	2500.00	15	30	0.00	21x15x1	f	1	2026-01-04 20:11:38.407523	2026-01-04 20:22:43.927946
-1	2	3	ATK-001-PULPEN	Pulpen Gel Hitam	Pulpen gel tinta hitam, ujung 0.5 mm, cocok untuk kebutuhan kantor	pcs	5000.00	3000.00	230	50	0.00	14x1x1	t	1	2026-01-04 19:05:18.222682	2026-01-05 01:40:57.489985
 2	2	3	ATK-002-PULPEN-BIRU	Pulpen Gel Biru	Pulpen gel tinta biru, ujung 0.5 mm, nyaman untuk menulis harian	pcs	4500.00	2800.00	290	60	0.00	14x1x1	t	1	2026-01-04 19:21:19.857357	2026-01-05 01:40:57.489985
+3	2	3	ATK-003-BUKU-A5	Buku Tulis A5 40 Lembar Update	Buku tulis ukuran A5, 40 lembar, kertas HVS	pcs	12000.00	8500.00	130	30	0.15	21x15x1	t	1	2026-01-04 19:21:31.602527	2026-01-08 00:59:51.560284
+1	2	3	ATK-001-PULPEN	Pulpen Gel Hitam	Pulpen gel tinta hitam, ujung 0.5 mm, cocok untuk kebutuhan kantor	pcs	5000.00	3000.00	220	50	0.00	14x1x1	t	1	2026-01-04 19:05:18.222682	2026-01-08 00:59:51.560284
 \.
 
 
 --
--- TOC entry 4972 (class 0 OID 19392)
--- Dependencies: 226
 -- Data for Name: racks; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
@@ -658,20 +591,18 @@ COPY public.racks (id, warehouse_id, code, name, location, capacity, description
 
 
 --
--- TOC entry 4978 (class 0 OID 19496)
--- Dependencies: 232
 -- Data for Name: sale_items; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 COPY public.sale_items (id, sale_id, item_id, quantity, unit_price, subtotal, discount, created_at) FROM stdin;
 3	7	1	20	5000.00	100000.00	0.00	2026-01-05 01:40:57.489985
 4	7	2	10	4500.00	40000.00	5000.00	2026-01-05 01:40:57.489985
+5	8	3	20	12000.00	240000.00	0.00	2026-01-08 00:59:51.560284
+6	8	1	10	5000.00	45000.00	5000.00	2026-01-08 00:59:51.560284
 \.
 
 
 --
--- TOC entry 4976 (class 0 OID 19463)
--- Dependencies: 230
 -- Data for Name: sales; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
@@ -680,12 +611,11 @@ COPY public.sales (id, invoice_number, customer_name, customer_phone, customer_e
 3	INV-20260104-002	Budi Santoso	\N	\N	2026-01-04 23:53:16.973214	1500000.00	50000.00	150000.00	1600000.00	cash	pending	Pembelian langsung di toko	1	2026-01-04 23:53:16.973214	2026-01-04 23:53:16.973214
 4	INV-20260105-001	Siti Aminah	089876543210	siti.aminah@mail.com	2026-01-04 23:55:49.473379	2750000.00	250000.00	275000.00	2775000.00	transfer	pending	Pembayaran via transfer BCA	1	2026-01-04 23:55:49.473379	2026-01-04 23:55:49.473379
 7	INV-002	Siti	081234567890	siti@mail.com	2026-01-05 01:40:57.489985	140000.00	0.00	10000.00	150000.00	cash	pending	Pembelian offline	1	2026-01-05 01:40:57.489985	2026-01-05 01:40:57.489985
+8	INV-003	Maesaroh	089999999999	maesaroh_update@mail.com	2026-01-08 00:59:51.560284	285000.00	0.00	10000.00	295000.00	transfer	paid	Customer ganti metode bayar	1	2026-01-08 00:59:51.560284	2026-01-08 01:32:21.462285
 \.
 
 
 --
--- TOC entry 4966 (class 0 OID 19328)
--- Dependencies: 220
 -- Data for Name: sessions; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
@@ -715,12 +645,14 @@ COPY public.sessions (id, user_id, token, created_at, expired_at, revoked_at, la
 23	1	818a6462-9530-4918-94b6-94100fcff21d	2026-01-04 00:36:46.376596	2026-01-05 00:36:46.367264	\N	2026-01-04 00:36:46.376596	[::1]:62466	PostmanRuntime/7.51.0
 24	1	005f5a6b-0b4a-4b1e-8fa7-2dd4f75cb4af	2026-01-04 18:59:28.8521	2026-01-05 18:59:28.845489	\N	2026-01-04 18:59:28.8521	[::1]:53093	PostmanRuntime/7.51.0
 25	1	594e399d-276b-444e-b404-9e1afe652c35	2026-01-04 20:19:51.311669	2026-01-05 20:19:51.310741	\N	2026-01-04 20:19:51.311669	[::1]:55768	PostmanRuntime/7.51.0
+26	2	7b8c50db-a5ff-4644-b5c9-c0ca50a1a818	2026-01-05 13:29:48.5372	2026-01-06 13:29:48.534327	\N	2026-01-05 13:29:48.5372	[::1]:49996	PostmanRuntime/7.51.0
+27	2	d50c5a59-ea4f-4804-9a8d-c2caa5b2d4d4	2026-01-08 00:25:43.979818	2026-01-09 00:25:43.97016	\N	2026-01-08 00:25:43.979818	[::1]:58836	PostmanRuntime/7.51.0
+28	1	247ce304-ac09-4ab7-81ef-a4b58893ac59	2026-01-08 00:46:16.277734	2026-01-09 00:46:16.269776	\N	2026-01-08 00:46:16.277734	[::1]:59049	PostmanRuntime/7.51.0
+29	1	5907ba49-be81-414b-bf23-2d7ce0f0f308	2026-01-08 11:52:49.571711	2026-01-09 11:52:49.565218	\N	2026-01-08 11:52:49.571711	[::1]:59547	PostmanRuntime/7.51.0
 \.
 
 
 --
--- TOC entry 4964 (class 0 OID 19308)
--- Dependencies: 218
 -- Data for Name: users; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
@@ -729,12 +661,12 @@ COPY public.users (id, username, email, password_hash, full_name, role, is_activ
 1	superadmin	superadmin@inventory.com	$2a$10$pL9g8SnW/L.gUzdJ31XzD.F.dXU.m/681noh9vBfYItae8TXXeh1.	Super Administrator	super_admin	t	2025-12-30 16:24:13.626667	2025-12-30 17:59:14.948955
 3	userfromsuperadmin	userfromsuperadmin@company.com	$2a$10$43KIdl0CWvxa.0O/upKfmukJ4vIUSLpVwm8GUt9VwU1ZUHD1S5epy	User From Super Admin	staff	t	2025-12-31 14:01:22.047577	2025-12-31 14:01:22.047577
 5	admin	admin@inventory.com	$2a$10$AGdlOAt9bTkZdRXWT0FQq.F1U9zkJRSQzJMzCu7aqYzW9Tw6i76ti	Admin Administrator	admin	t	2026-01-03 16:54:25.633441	2026-01-03 16:54:25.633441
+6	johnstaffupdated	john.updated@mail.com	$2a$10$HotBMbF292E3uOqw/SDDIOsrXV2/ItQ24K58fuRCdHfAyf3hd7VTe	John Doe Updated	staff	t	2026-01-08 11:54:55.32678	2026-01-08 11:56:44.859901
+7	johndelete	johndelete@company.com	$2a$10$onMCm2cSnx.WeJdMkP0DreFitLxouyienZZRaQAri3RRkVya.Lq.2	Staff untuk testing delete	staff	f	2026-01-08 11:57:54.021072	2026-01-08 11:59:08.543443
 \.
 
 
 --
--- TOC entry 4970 (class 0 OID 19371)
--- Dependencies: 224
 -- Data for Name: warehouses; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
@@ -746,8 +678,6 @@ COPY public.warehouses (id, code, name, address, city, province, postal_code, ph
 
 
 --
--- TOC entry 5000 (class 0 OID 0)
--- Dependencies: 221
 -- Name: categories_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
@@ -755,8 +685,6 @@ SELECT pg_catalog.setval('public.categories_id_seq', 4, true);
 
 
 --
--- TOC entry 5001 (class 0 OID 0)
--- Dependencies: 227
 -- Name: items_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
@@ -764,8 +692,6 @@ SELECT pg_catalog.setval('public.items_id_seq', 4, true);
 
 
 --
--- TOC entry 5002 (class 0 OID 0)
--- Dependencies: 225
 -- Name: racks_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
@@ -773,44 +699,34 @@ SELECT pg_catalog.setval('public.racks_id_seq', 4, true);
 
 
 --
--- TOC entry 5003 (class 0 OID 0)
--- Dependencies: 231
 -- Name: sale_items_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.sale_items_id_seq', 4, true);
+SELECT pg_catalog.setval('public.sale_items_id_seq', 6, true);
 
 
 --
--- TOC entry 5004 (class 0 OID 0)
--- Dependencies: 229
 -- Name: sales_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.sales_id_seq', 7, true);
+SELECT pg_catalog.setval('public.sales_id_seq', 8, true);
 
 
 --
--- TOC entry 5005 (class 0 OID 0)
--- Dependencies: 219
 -- Name: sessions_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.sessions_id_seq', 25, true);
+SELECT pg_catalog.setval('public.sessions_id_seq', 29, true);
 
 
 --
--- TOC entry 5006 (class 0 OID 0)
--- Dependencies: 217
 -- Name: users_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.users_id_seq', 5, true);
+SELECT pg_catalog.setval('public.users_id_seq', 7, true);
 
 
 --
--- TOC entry 5007 (class 0 OID 0)
--- Dependencies: 223
 -- Name: warehouses_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
@@ -818,7 +734,6 @@ SELECT pg_catalog.setval('public.warehouses_id_seq', 3, true);
 
 
 --
--- TOC entry 4757 (class 2606 OID 19362)
 -- Name: categories categories_code_key; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -827,7 +742,6 @@ ALTER TABLE ONLY public.categories
 
 
 --
--- TOC entry 4759 (class 2606 OID 19360)
 -- Name: categories categories_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -836,7 +750,6 @@ ALTER TABLE ONLY public.categories
 
 
 --
--- TOC entry 4784 (class 2606 OID 19438)
 -- Name: items items_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -845,7 +758,6 @@ ALTER TABLE ONLY public.items
 
 
 --
--- TOC entry 4786 (class 2606 OID 19440)
 -- Name: items items_sku_key; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -854,7 +766,6 @@ ALTER TABLE ONLY public.items
 
 
 --
--- TOC entry 4774 (class 2606 OID 19405)
 -- Name: racks racks_code_key; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -863,7 +774,6 @@ ALTER TABLE ONLY public.racks
 
 
 --
--- TOC entry 4776 (class 2606 OID 19403)
 -- Name: racks racks_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -872,7 +782,6 @@ ALTER TABLE ONLY public.racks
 
 
 --
--- TOC entry 4798 (class 2606 OID 19507)
 -- Name: sale_items sale_items_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -881,7 +790,6 @@ ALTER TABLE ONLY public.sale_items
 
 
 --
--- TOC entry 4792 (class 2606 OID 19485)
 -- Name: sales sales_invoice_number_key; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -890,7 +798,6 @@ ALTER TABLE ONLY public.sales
 
 
 --
--- TOC entry 4794 (class 2606 OID 19483)
 -- Name: sales sales_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -899,7 +806,6 @@ ALTER TABLE ONLY public.sales
 
 
 --
--- TOC entry 4753 (class 2606 OID 19338)
 -- Name: sessions sessions_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -908,7 +814,6 @@ ALTER TABLE ONLY public.sessions
 
 
 --
--- TOC entry 4755 (class 2606 OID 19340)
 -- Name: sessions sessions_token_key; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -917,7 +822,6 @@ ALTER TABLE ONLY public.sessions
 
 
 --
--- TOC entry 4763 (class 2606 OID 19539)
 -- Name: categories unique_categories_name; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -926,7 +830,6 @@ ALTER TABLE ONLY public.categories
 
 
 --
--- TOC entry 4744 (class 2606 OID 19323)
 -- Name: users users_email_key; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -935,7 +838,6 @@ ALTER TABLE ONLY public.users
 
 
 --
--- TOC entry 4746 (class 2606 OID 19319)
 -- Name: users users_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -944,7 +846,6 @@ ALTER TABLE ONLY public.users
 
 
 --
--- TOC entry 4748 (class 2606 OID 19321)
 -- Name: users users_username_key; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -953,7 +854,6 @@ ALTER TABLE ONLY public.users
 
 
 --
--- TOC entry 4767 (class 2606 OID 19383)
 -- Name: warehouses warehouses_code_key; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -962,7 +862,6 @@ ALTER TABLE ONLY public.warehouses
 
 
 --
--- TOC entry 4769 (class 2606 OID 19381)
 -- Name: warehouses warehouses_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -971,7 +870,6 @@ ALTER TABLE ONLY public.warehouses
 
 
 --
--- TOC entry 4760 (class 1259 OID 19368)
 -- Name: idx_categories_code; Type: INDEX; Schema: public; Owner: postgres
 --
 
@@ -979,7 +877,6 @@ CREATE INDEX idx_categories_code ON public.categories USING btree (code);
 
 
 --
--- TOC entry 4761 (class 1259 OID 19369)
 -- Name: idx_categories_is_active; Type: INDEX; Schema: public; Owner: postgres
 --
 
@@ -987,7 +884,6 @@ CREATE INDEX idx_categories_is_active ON public.categories USING btree (is_activ
 
 
 --
--- TOC entry 4777 (class 1259 OID 19457)
 -- Name: idx_items_category_id; Type: INDEX; Schema: public; Owner: postgres
 --
 
@@ -995,7 +891,6 @@ CREATE INDEX idx_items_category_id ON public.items USING btree (category_id);
 
 
 --
--- TOC entry 4778 (class 1259 OID 19459)
 -- Name: idx_items_is_active; Type: INDEX; Schema: public; Owner: postgres
 --
 
@@ -1003,7 +898,6 @@ CREATE INDEX idx_items_is_active ON public.items USING btree (is_active);
 
 
 --
--- TOC entry 4779 (class 1259 OID 19461)
 -- Name: idx_items_minimum_stock; Type: INDEX; Schema: public; Owner: postgres
 --
 
@@ -1011,7 +905,6 @@ CREATE INDEX idx_items_minimum_stock ON public.items USING btree (stock, minimum
 
 
 --
--- TOC entry 4780 (class 1259 OID 19458)
 -- Name: idx_items_rack_id; Type: INDEX; Schema: public; Owner: postgres
 --
 
@@ -1019,7 +912,6 @@ CREATE INDEX idx_items_rack_id ON public.items USING btree (rack_id);
 
 
 --
--- TOC entry 4781 (class 1259 OID 19456)
 -- Name: idx_items_sku; Type: INDEX; Schema: public; Owner: postgres
 --
 
@@ -1027,7 +919,6 @@ CREATE INDEX idx_items_sku ON public.items USING btree (sku);
 
 
 --
--- TOC entry 4782 (class 1259 OID 19460)
 -- Name: idx_items_stock; Type: INDEX; Schema: public; Owner: postgres
 --
 
@@ -1035,7 +926,6 @@ CREATE INDEX idx_items_stock ON public.items USING btree (stock);
 
 
 --
--- TOC entry 4770 (class 1259 OID 19416)
 -- Name: idx_racks_code; Type: INDEX; Schema: public; Owner: postgres
 --
 
@@ -1043,7 +933,6 @@ CREATE INDEX idx_racks_code ON public.racks USING btree (code);
 
 
 --
--- TOC entry 4771 (class 1259 OID 19418)
 -- Name: idx_racks_is_active; Type: INDEX; Schema: public; Owner: postgres
 --
 
@@ -1051,7 +940,6 @@ CREATE INDEX idx_racks_is_active ON public.racks USING btree (is_active);
 
 
 --
--- TOC entry 4772 (class 1259 OID 19417)
 -- Name: idx_racks_warehouse_id; Type: INDEX; Schema: public; Owner: postgres
 --
 
@@ -1059,7 +947,6 @@ CREATE INDEX idx_racks_warehouse_id ON public.racks USING btree (warehouse_id);
 
 
 --
--- TOC entry 4795 (class 1259 OID 19519)
 -- Name: idx_sale_items_item_id; Type: INDEX; Schema: public; Owner: postgres
 --
 
@@ -1067,7 +954,6 @@ CREATE INDEX idx_sale_items_item_id ON public.sale_items USING btree (item_id);
 
 
 --
--- TOC entry 4796 (class 1259 OID 19518)
 -- Name: idx_sale_items_sale_id; Type: INDEX; Schema: public; Owner: postgres
 --
 
@@ -1075,7 +961,6 @@ CREATE INDEX idx_sale_items_sale_id ON public.sale_items USING btree (sale_id);
 
 
 --
--- TOC entry 4787 (class 1259 OID 19493)
 -- Name: idx_sales_created_by; Type: INDEX; Schema: public; Owner: postgres
 --
 
@@ -1083,7 +968,6 @@ CREATE INDEX idx_sales_created_by ON public.sales USING btree (created_by);
 
 
 --
--- TOC entry 4788 (class 1259 OID 19491)
 -- Name: idx_sales_invoice_number; Type: INDEX; Schema: public; Owner: postgres
 --
 
@@ -1091,7 +975,6 @@ CREATE INDEX idx_sales_invoice_number ON public.sales USING btree (invoice_numbe
 
 
 --
--- TOC entry 4789 (class 1259 OID 19494)
 -- Name: idx_sales_payment_status; Type: INDEX; Schema: public; Owner: postgres
 --
 
@@ -1099,7 +982,6 @@ CREATE INDEX idx_sales_payment_status ON public.sales USING btree (payment_statu
 
 
 --
--- TOC entry 4790 (class 1259 OID 19492)
 -- Name: idx_sales_sale_date; Type: INDEX; Schema: public; Owner: postgres
 --
 
@@ -1107,7 +989,6 @@ CREATE INDEX idx_sales_sale_date ON public.sales USING btree (sale_date);
 
 
 --
--- TOC entry 4749 (class 1259 OID 19348)
 -- Name: idx_sessions_expired_at; Type: INDEX; Schema: public; Owner: postgres
 --
 
@@ -1115,7 +996,6 @@ CREATE INDEX idx_sessions_expired_at ON public.sessions USING btree (expired_at)
 
 
 --
--- TOC entry 4750 (class 1259 OID 19346)
 -- Name: idx_sessions_token; Type: INDEX; Schema: public; Owner: postgres
 --
 
@@ -1123,7 +1003,6 @@ CREATE INDEX idx_sessions_token ON public.sessions USING btree (token);
 
 
 --
--- TOC entry 4751 (class 1259 OID 19347)
 -- Name: idx_sessions_user_id; Type: INDEX; Schema: public; Owner: postgres
 --
 
@@ -1131,7 +1010,6 @@ CREATE INDEX idx_sessions_user_id ON public.sessions USING btree (user_id);
 
 
 --
--- TOC entry 4740 (class 1259 OID 19324)
 -- Name: idx_users_email; Type: INDEX; Schema: public; Owner: postgres
 --
 
@@ -1139,7 +1017,6 @@ CREATE INDEX idx_users_email ON public.users USING btree (email);
 
 
 --
--- TOC entry 4741 (class 1259 OID 19326)
 -- Name: idx_users_role; Type: INDEX; Schema: public; Owner: postgres
 --
 
@@ -1147,7 +1024,6 @@ CREATE INDEX idx_users_role ON public.users USING btree (role);
 
 
 --
--- TOC entry 4742 (class 1259 OID 19325)
 -- Name: idx_users_username; Type: INDEX; Schema: public; Owner: postgres
 --
 
@@ -1155,7 +1031,6 @@ CREATE INDEX idx_users_username ON public.users USING btree (username);
 
 
 --
--- TOC entry 4764 (class 1259 OID 19389)
 -- Name: idx_warehouses_code; Type: INDEX; Schema: public; Owner: postgres
 --
 
@@ -1163,7 +1038,6 @@ CREATE INDEX idx_warehouses_code ON public.warehouses USING btree (code);
 
 
 --
--- TOC entry 4765 (class 1259 OID 19390)
 -- Name: idx_warehouses_is_active; Type: INDEX; Schema: public; Owner: postgres
 --
 
@@ -1171,7 +1045,6 @@ CREATE INDEX idx_warehouses_is_active ON public.warehouses USING btree (is_activ
 
 
 --
--- TOC entry 4811 (class 2620 OID 19522)
 -- Name: categories update_categories_updated_at; Type: TRIGGER; Schema: public; Owner: postgres
 --
 
@@ -1179,7 +1052,6 @@ CREATE TRIGGER update_categories_updated_at BEFORE UPDATE ON public.categories F
 
 
 --
--- TOC entry 4814 (class 2620 OID 19525)
 -- Name: items update_items_updated_at; Type: TRIGGER; Schema: public; Owner: postgres
 --
 
@@ -1187,7 +1059,6 @@ CREATE TRIGGER update_items_updated_at BEFORE UPDATE ON public.items FOR EACH RO
 
 
 --
--- TOC entry 4813 (class 2620 OID 19524)
 -- Name: racks update_racks_updated_at; Type: TRIGGER; Schema: public; Owner: postgres
 --
 
@@ -1195,7 +1066,6 @@ CREATE TRIGGER update_racks_updated_at BEFORE UPDATE ON public.racks FOR EACH RO
 
 
 --
--- TOC entry 4815 (class 2620 OID 19526)
 -- Name: sales update_sales_updated_at; Type: TRIGGER; Schema: public; Owner: postgres
 --
 
@@ -1203,7 +1073,6 @@ CREATE TRIGGER update_sales_updated_at BEFORE UPDATE ON public.sales FOR EACH RO
 
 
 --
--- TOC entry 4810 (class 2620 OID 19521)
 -- Name: users update_users_updated_at; Type: TRIGGER; Schema: public; Owner: postgres
 --
 
@@ -1211,7 +1080,6 @@ CREATE TRIGGER update_users_updated_at BEFORE UPDATE ON public.users FOR EACH RO
 
 
 --
--- TOC entry 4812 (class 2620 OID 19523)
 -- Name: warehouses update_warehouses_updated_at; Type: TRIGGER; Schema: public; Owner: postgres
 --
 
@@ -1219,7 +1087,6 @@ CREATE TRIGGER update_warehouses_updated_at BEFORE UPDATE ON public.warehouses F
 
 
 --
--- TOC entry 4800 (class 2606 OID 19363)
 -- Name: categories categories_created_by_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -1228,7 +1095,6 @@ ALTER TABLE ONLY public.categories
 
 
 --
--- TOC entry 4804 (class 2606 OID 19441)
 -- Name: items items_category_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -1237,7 +1103,6 @@ ALTER TABLE ONLY public.items
 
 
 --
--- TOC entry 4805 (class 2606 OID 19451)
 -- Name: items items_created_by_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -1246,7 +1111,6 @@ ALTER TABLE ONLY public.items
 
 
 --
--- TOC entry 4806 (class 2606 OID 19446)
 -- Name: items items_rack_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -1255,7 +1119,6 @@ ALTER TABLE ONLY public.items
 
 
 --
--- TOC entry 4802 (class 2606 OID 19411)
 -- Name: racks racks_created_by_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -1264,7 +1127,6 @@ ALTER TABLE ONLY public.racks
 
 
 --
--- TOC entry 4803 (class 2606 OID 19406)
 -- Name: racks racks_warehouse_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -1273,7 +1135,6 @@ ALTER TABLE ONLY public.racks
 
 
 --
--- TOC entry 4808 (class 2606 OID 19513)
 -- Name: sale_items sale_items_item_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -1282,7 +1143,6 @@ ALTER TABLE ONLY public.sale_items
 
 
 --
--- TOC entry 4809 (class 2606 OID 19508)
 -- Name: sale_items sale_items_sale_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -1291,7 +1151,6 @@ ALTER TABLE ONLY public.sale_items
 
 
 --
--- TOC entry 4807 (class 2606 OID 19486)
 -- Name: sales sales_created_by_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -1300,7 +1159,6 @@ ALTER TABLE ONLY public.sales
 
 
 --
--- TOC entry 4799 (class 2606 OID 19341)
 -- Name: sessions sessions_user_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -1309,15 +1167,12 @@ ALTER TABLE ONLY public.sessions
 
 
 --
--- TOC entry 4801 (class 2606 OID 19384)
 -- Name: warehouses warehouses_created_by_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.warehouses
     ADD CONSTRAINT warehouses_created_by_fkey FOREIGN KEY (created_by) REFERENCES public.users(id);
 
-
--- Completed on 2026-01-05 01:59:21
 
 --
 -- PostgreSQL database dump complete
