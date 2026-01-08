@@ -49,6 +49,12 @@ func NewRouter(h *handler.Container, log *zap.Logger) *chi.Mux {
 		r.Route("/users", func(r chi.Router) {
 			r.With(role.AllowAdmin()).Post("/", h.User.Create)
 			r.With(role.AllowAdmin()).Get("/", h.User.Lists)
+
+			r.Route("/{id}", func(r chi.Router) {
+				r.With(role.AllowAdmin()).Get("/", h.User.Detail)
+				r.With(role.AllowAdmin()).Put("/", h.User.Update)
+				r.With(role.AllowAdmin()).Delete("/", h.User.Delete)
+			})
 		})
 
 		r.Route("/warehouse", func(r chi.Router) {

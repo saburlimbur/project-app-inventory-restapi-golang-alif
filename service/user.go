@@ -14,6 +14,9 @@ import (
 type UserService interface {
 	Create(ctx context.Context, currentUser *model.User, req dto.CreateUserRequest) (*model.User, error)
 	FindAll(page, limit int) (*[]model.User, *dto.Pagination, error)
+	Update(ctx context.Context, currentUser *model.User, id int, req dto.UpdateUserRequest) error
+	Delete(ctx context.Context, currentUser *model.User, id int) error
+	Detail(ctx context.Context, id int) (*model.User, error)
 }
 type userService struct {
 	repo    repository.UserRepository
@@ -84,4 +87,50 @@ func (s *userService) FindAll(page, limit int) (*[]model.User, *dto.Pagination, 
 	}
 
 	return &users, &pagination, nil
+}
+
+func (s *userService) Detail(ctx context.Context, id int) (*model.User, error) {
+	return s.repo.FindByID(ctx, id)
+}
+
+func (s *userService) Update(ctx context.Context, currentUser *model.User, id int, req dto.UpdateUserRequest) error {
+
+	if currentUser.Role != "admin" && currentUser.Role != "super_admin" {
+		return errors.New("forbidden")
+	}
+
+	user, err := s.repo.FindByID(ctx, id)
+	if err != nil {
+		return err
+	}
+
+	if req.Username != nil {
+		user.Username = *req.Username
+	}
+
+	if req.Email != nil {
+		user.Email = *req.Email
+	}
+
+	if req.FullName != nil {
+		user.FullName = *req.FullName
+	}
+
+	if req.Role != nil {
+		user.Role = *req.Role
+	}
+
+	if req.IsActive != nil {
+		user.IsActive = *req.IsActive
+	}
+
+	return s.repo.Update(ctx, user)
+}
+
+func (s *userService) Delete(ctx context.Context, currentUser *model.User, id int) error {
+	if currentUser.Role != "admin" && currentUser.Role != "super_admin" {
+		return errors.New("forbidden")
+	}
+
+	return s.repo.Delete(ctx, id)
 }

@@ -10,6 +10,7 @@ import (
 	"net/http"
 	"strconv"
 
+	"github.com/go-chi/chi/v5"
 	"github.com/go-playground/validator/v10"
 	"go.uber.org/zap"
 )
@@ -92,4 +93,52 @@ func (h *UserHandler) Lists(w http.ResponseWriter, r *http.Request) {
 	}
 
 	utils.JSONWithPagination(w, http.StatusOK, "success get data", users, *pagination)
+}
+
+func (h *UserHandler) Detail(w http.ResponseWriter, r *http.Request) {
+	id, _ := strconv.Atoi(chi.URLParam(r, "id"))
+
+	user, err := h.UserService.Detail(r.Context(), id)
+	if err != nil {
+		utils.JSONError(w, http.StatusNotFound, "user not found", nil)
+		return
+	}
+
+	utils.JSONSuccess(w, http.StatusOK, "success", dto.ToUserResponseDTO(user))
+}
+
+func (h *UserHandler) Update(w http.ResponseWriter, r *http.Request) {
+	id, _ := strconv.Atoi(chi.URLParam(r, "id"))
+
+	currentUser := r.Context().
+		Value(appMiddleware.UserContextKey).(*model.User)
+
+	var req dto.UpdateUserRequest
+	json.NewDecoder(r.Body).Decode(&req)
+
+	if validationErrors, err := utils.ValidateErrors(req); err != nil {
+		utils.JSONError(w, http.StatusBadRequest, "validation failed", validationErrors)
+		return
+	}
+
+	if err := h.UserService.Update(r.Context(), currentUser, id, req); err != nil {
+		utils.JSONError(w, http.StatusForbidden, err.Error(), nil)
+		return
+	}
+
+	utils.JSONSuccess(w, http.StatusOK, "user updated", nil)
+}
+
+func (h *UserHandler) Delete(w http.ResponseWriter, r *http.Request) {
+	id, _ := strconv.Atoi(chi.URLParam(r, "id"))
+
+	currentUser := r.Context().
+		Value(appMiddleware.UserContextKey).(*model.User)
+
+	if err := h.UserService.Delete(r.Context(), currentUser, id); err != nil {
+		utils.JSONError(w, http.StatusForbidden, err.Error(), nil)
+		return
+	}
+
+	utils.JSONSuccess(w, http.StatusOK, "user deactivated", nil)
 }

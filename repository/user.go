@@ -4,6 +4,7 @@ import (
 	"alfdwirhmn/inventory/database"
 	"alfdwirhmn/inventory/model"
 	"context"
+	"errors"
 
 	"go.uber.org/zap"
 )
@@ -11,6 +12,8 @@ import (
 type UserRepository interface {
 	Create(ctx context.Context, user *model.User) (*model.User, error)
 	Lists(page, limit int) ([]model.User, int, error)
+	Update(ctx context.Context, user *model.User) error
+	Delete(ctx context.Context, id int) error
 
 	IsEmailExists(ctx context.Context, email string, excludeID int) (bool, error)
 	IsUsernameExists(ctx context.Context, username string, excludeID int) (bool, error)
@@ -106,6 +109,58 @@ func (r *userRepository) Lists(page, limit int) ([]model.User, int, error) {
 	}
 
 	return users, total, nil
+}
+
+func (r *userRepository) Update(ctx context.Context, user *model.User) error {
+	query := `
+		UPDATE users
+		SET
+			username = $1,
+			email = $2,
+			full_name = $3,
+			role = $4,
+			is_active = $5,
+			updated_at = NOW()
+		WHERE id = $6
+	`
+
+	cmd, err := r.DB.Exec(ctx, query,
+		user.Username,
+		user.Email,
+		user.FullName,
+		user.Role,
+		user.IsActive,
+		user.ID,
+	)
+
+	if err != nil {
+		return err
+	}
+
+	if cmd.RowsAffected() == 0 {
+		return errors.New("user not found")
+	}
+
+	return nil
+}
+
+func (r *userRepository) Delete(ctx context.Context, id int) error {
+	query := `
+		UPDATE users
+		SET is_active = false, updated_at = NOW()
+		WHERE id = $1
+	`
+
+	cmd, err := r.DB.Exec(ctx, query, id)
+	if err != nil {
+		return err
+	}
+
+	if cmd.RowsAffected() == 0 {
+		return errors.New("user not found")
+	}
+
+	return nil
 }
 
 // uniq user field berdasarkan email

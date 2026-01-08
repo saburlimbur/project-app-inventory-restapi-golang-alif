@@ -46,11 +46,11 @@ type LoginResponse struct {
 }
 
 type UpdateUserRequest struct {
-	Username string `json:"username" validate:"omitempty,min=3,max=50,alphanum"`
-	Email    string `json:"email" validate:"omitempty,email,max=100"`
-	FullName string `json:"full_name" validate:"omitempty,min=3,max=100"`
-	Role     string `json:"role" validate:"omitempty,oneof=super_admin admin staff"`
-	IsActive *bool  `json:"is_active"`
+	Username *string `json:"username" validate:"omitempty,min=3"`
+	Email    *string `json:"email" validate:"omitempty,email"`
+	FullName *string `json:"full_name" validate:"omitempty"`
+	Role     *string `json:"role" validate:"omitempty,oneof=super_admin admin staff"`
+	IsActive *bool   `json:"is_active"`
 }
 
 // helper konversi dari model user untuk response dto user
